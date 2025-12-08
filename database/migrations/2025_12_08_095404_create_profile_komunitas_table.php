@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title'); // required
             $table->text('deskripsi'); // required
             $table->string('photo'); // required (path file)
+            $table->softDeletes();
             $table->timestamps();
         });
     }

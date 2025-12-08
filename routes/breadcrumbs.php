@@ -218,3 +218,26 @@ Breadcrumbs::for('article.show', function (BreadcrumbTrail $trail, $article) {
 });
 
 // **************************** END ARTICLE ***************************
+
+// **************************** PROFIL KOMUNITAS ***************************
+
+// Home > Profil Komunitas 
+Breadcrumbs::for('profil_komunitas.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profil Komunitas', route('profil_komunitas.index'));
+});
+
+// Home > Profil Komunitas  > [Update]
+Breadcrumbs::for('profil_komunitas.edit', function (BreadcrumbTrail $trail, $profilkomunitas) {
+    $trail->parent('profil_komunitas.index');
+    $trail->push('Update [' . $profilkomunitas->title . ']', route('profil_komunitas.edit', $profilkomunitas));
+});
+
+
+// Home > Profil Komunitas  > Create
+Breadcrumbs::for('profil_komunitas.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('profil_komunitas.index');
+    $trail->push('Create', route('profil_komunitas.create'));
+});
+
+// **************************** END ARTICLE ***************************

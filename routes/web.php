@@ -47,6 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'article' => 'article:slug',
     ]);
 
+    Route::resource('/profil_komunitas', App\Http\Controllers\ProfileKomunitasController::class)->except('show');
+
     // Route::prefix('setting')->group(function () {
     //     Route::get('/',[App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
     //     Route::get('/create',[App\Http\Controllers\SettingController::class, 'create'])->name('setting.create');
