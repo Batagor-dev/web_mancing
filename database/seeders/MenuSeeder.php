@@ -111,7 +111,7 @@ class MenuSeeder extends Seeder
         ]);
 
         $banner = Menu::create([
-            'nama_menu'          => 'banner',
+            'nama_menu'          => 'Banner',
             'permission_group_id'=> 9, 
             'icon'               => 'ri-advertisement-line',
             'status'             => '1',
@@ -119,5 +119,13 @@ class MenuSeeder extends Seeder
             'href'               => '/banner',
         ]);
         
+        $profilKomunitas = Menu::create([
+            'nama_menu'          => 'Profil Komunitas',
+            'permission_group_id'=> 10, 
+            'icon'               => 'ri-community-line',
+            'status'             => '1',
+            'sort'               => '3',
+            'href'               => '/profil_komunitas',
+        ]);
     }
 }

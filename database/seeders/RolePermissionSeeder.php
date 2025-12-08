@@ -26,6 +26,7 @@ class RolePermissionSeeder extends Seeder
             'Article',
             'Setting',
             'Banner',
+            'Profil Komunitas'
         ];
 
         foreach ($permissiongroups as $permissiongroup) {
@@ -77,6 +78,11 @@ class RolePermissionSeeder extends Seeder
             'Banner Create-9',
             'Banner Update-9',
             'Banner Delete-9',
+            'Profil Komunitas Access-10',
+            'Profil Komunitas Detail-10',
+            'Profil Komunitas Create-10',
+            'Profil Komunitas Update-10',
+            'Profil Komunitas Delete-10',
         ];
 
         foreach ($permissions as $permission) {
