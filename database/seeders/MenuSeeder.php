@@ -109,6 +109,15 @@ class MenuSeeder extends Seeder
             'status'             => '1',
             'sort'               => '3',
         ]);
+
+        $banner = Menu::create([
+            'nama_menu'          => 'banner',
+            'permission_group_id'=> 9, 
+            'icon'               => 'ri-advertisement-line',
+            'status'             => '1',
+            'sort'               => '3',
+            'href'               => '/banner',
+        ]);
         
     }
 }
