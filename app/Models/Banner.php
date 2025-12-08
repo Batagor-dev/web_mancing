@@ -2,9 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Permission;
+use App\Models\Traits\HasUuid;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Banner extends Model
 {
-    //
+    use HasFactory, HasUuid, SoftDeletes;
+
+    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'uuid', 'name', 'link', 'photo',
+    ];
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }

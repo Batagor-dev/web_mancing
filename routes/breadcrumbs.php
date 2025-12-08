@@ -219,6 +219,28 @@ Breadcrumbs::for('article.show', function (BreadcrumbTrail $trail, $article) {
 
 // **************************** END ARTICLE ***************************
 
+// **************************** Banner ***************************
+
+// Home > Banner
+Breadcrumbs::for('banner.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Banner', route('banner.index'));
+});
+
+// Home > Banner > [Update]
+Breadcrumbs::for('banner.edit', function (BreadcrumbTrail $trail, $banner) {
+    $trail->parent('banner.index');
+    $trail->push('Update [' . $banner->name . ']', route('banner.edit', $banner));
+});
+
+// Home > Banner > Create
+Breadcrumbs::for('banner.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('banner.index');
+    $trail->push('Create', route('banner.create'));
+});
+
+// **************************** END Banner ***************************
+
 // **************************** PROFIL KOMUNITAS ***************************
 
 // Home > Profil Komunitas 
