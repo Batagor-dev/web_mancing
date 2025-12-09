@@ -15,16 +15,27 @@ class Galery extends Model
     protected $fillable = [
         'uuid',
         'slug',
-        'photo',
         'title',
+        'photo',
         'time',
     ];
 
+    /**
+     * Gunakan UUID untuk route model binding
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    /**
+     * Boot method untuk auto-generate UUID dan slug saat creating
+     */
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($galery) {
+        static::creating(function (Galery $galery) {
             // generate uuid jika belum ada
             if (empty($galery->uuid)) {
                 $galery->uuid = (string) Str::uuid();

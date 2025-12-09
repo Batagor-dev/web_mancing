@@ -24,7 +24,7 @@ class UpdateGaleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'title' => 'required|string|max:255',
             'time'  => 'required|string|max:255',
         ];

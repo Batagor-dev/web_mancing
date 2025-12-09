@@ -6,6 +6,7 @@ use App\Models\Galery;
 use App\Http\Requests\StoreGaleryRequest;
 use App\Http\Requests\UpdateGaleryRequest;
 use App\DataTables\GaleryDataTable;
+use Illuminate\Support\Facades\Storage;
 
 class GaleryController extends Controller
 {
@@ -26,8 +27,9 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        $this->data['galeries'] = Galery::all();
+        $this->data['galerys'] = Galery::all();
 
+        // action form create
         $this->data['action'] = "/galery";
         return view('galery.form', $this->data);
     }
@@ -40,9 +42,18 @@ class GaleryController extends Controller
      */
     public function store(StoreGaleryRequest $request)
     {
-        Galery::create($request->all());
+        // create galery
+        $data = $request->all();
 
-        return redirect('/galery')->with('success', 'New galery item has been created!');
+        // Upload foto jika ada
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('galeries', 'public');
+        }
+
+        Galery::create($data);
+
+        // redirect ke galery
+        return redirect('/galery')->with('success', 'New Galery has been created!');
     }
 
     /**
@@ -53,10 +64,14 @@ class GaleryController extends Controller
      */
     public function edit(Galery $galery)
     {
-        $this->data['galeries'] = Galery::all();
+        $this->data['galerys'] = Galery::all();
 
+        // data galery untuk form edit
         $this->data['galery_data'] = $galery;
-        $this->data['action'] = "/galery/".$galery->uuid;
+
+        // action form edit
+        $this->data['action'] = "/galery/" . $galery->uuid;
+
         return view('galery.form', $this->data);
     }
 
@@ -69,10 +84,25 @@ class GaleryController extends Controller
      */
     public function update(UpdateGaleryRequest $request, Galery $galery)
     {
-        Galery::where('uuid', $galery->uuid)
-            ->update($request->all());
+        // ambil semua data request
+        $data = $request->all();
 
-        return redirect('/galery')->with('success', 'Galery item has been updated!');
+        // Upload foto baru jika ada
+        if ($request->hasFile('photo')) {
+
+            // Hapus foto lama jika ada
+            if ($galery->photo && Storage::disk('public')->exists($galery->photo)) {
+                Storage::disk('public')->delete($galery->photo);
+            }
+
+            // Simpan foto baru
+            $data['photo'] = $request->file('photo')->store('galeries', 'public');
+        }
+
+        // update galery
+        $galery->update($data);
+
+        return redirect('/galery')->with('success', 'Galery has been updated!');
     }
 
     /**
@@ -83,7 +113,14 @@ class GaleryController extends Controller
      */
     public function destroy(Galery $galery)
     {
+        // delete foto dari storage jika ada
+        if ($galery->photo && Storage::disk('public')->exists($galery->photo)) {
+            Storage::disk('public')->delete($galery->photo);
+        }
+
+        // delete galery
         $galery->delete();
-        return redirect('/galery')->with('success', 'Galery item has been deleted!');
+
+        return redirect('/galery')->with('success', 'Galery has been deleted!');
     }
 }

@@ -13,7 +13,7 @@ class StoreGaleryRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true; // biarkan true biar request bisa dipakai
     }
 
     /**
@@ -24,9 +24,9 @@ class StoreGaleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'title' => 'required|string|max:255',
-            'time'  => 'required|string|max:255', 
+            'time'  => 'required|date',
         ];
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('photo'); // required
             $table->string('title'); // required
             $table->string('time'); // required (jika ingin datetime, ganti ke ->dateTime())
+            $table->softDeletes();
             $table->timestamps();
         });
     }
