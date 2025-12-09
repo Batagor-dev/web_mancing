@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('stukturals', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+            $table->string('unit', 100);
+            $table->string('jabatan', 100);
+            $table->string('name', 100);
+            $table->string('photo', 255);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

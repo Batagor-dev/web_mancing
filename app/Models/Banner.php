@@ -14,6 +14,10 @@ class Banner extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     protected $fillable = [
         'uuid', 'name', 'link', 'photo','status'
     ];
