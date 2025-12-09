@@ -6,9 +6,9 @@ use App\Models\Stuktural;
 use App\Http\Requests\StoreStukturalRequest;
 use App\Http\Requests\UpdateStukturalRequest;
 use App\DataTables\StukturalDataTable;
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class StukturalController extends Controller
 {
@@ -19,7 +19,7 @@ class StukturalController extends Controller
      */
     public function index(StukturalDataTable $dataTable)
     {
-        return $dataTable->render('permissiongroup.index');
+        return $dataTable->render('stuktural.index');
     }
 
     /**
@@ -29,23 +29,36 @@ class StukturalController extends Controller
      */
     public function create()
     {
-        $this->data['permissiongroups'] = Stuktural::all();
+        $this->data['stukturals'] = Stuktural::all();
 
-        $this->data['action'] = "/permissiongroup";
-        return view('permissiongroup.form', $this->data);
+        $this->data['action'] = "/stuktural";
+        return view('stuktural.form', $this->data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePermissionGroupRequest  $request
+     * @param  \App\Http\Requests\StoreStukturalRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePermissionGroupRequest $request)
+    public function store(StoreStukturalRequest $request)
     {
-        Stuktural::create($request->all());
+        $data = $request->validated();
 
-        return redirect('/permissiongroup')->with('success', 'New permission group has been created!');
+        if ($request->photo) {
+        $image = str_replace('data:image/jpeg;base64,', '', $request->photo);
+        $image = base64_decode($image);
+
+        $filename = 'photo_' . time() . '.jpg';
+
+        Storage::disk('public')->put('uploads/stuktural/' . $filename, $image);
+
+        $data['photo'] = $filename;
+    }
+
+        Stuktural::create($data);
+
+        return redirect('/stuktural')->with('success', 'New Struktural has been created!');
     }
 
     /**
@@ -56,26 +69,43 @@ class StukturalController extends Controller
      */
     public function edit(Stuktural $stuktural)
     {
-        $this->data['permissiongroups'] = Stuktural::all();
+        $this->data['stukturals'] = Stuktural::all();
 
-        $this->data['permissiongroup_data'] = $stuktural;
-        $this->data['action'] = "/permissiongroup/".$stuktural->uuid;
-        return view('permissiongroup.form', $this->data);
+        $this->data['stuktural_data'] = $stuktural;
+        $this->data['action'] = "/stuktural/".$stuktural->uuid;
+        return view('stuktural.form', $this->data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePermissionGroupRequest  $request
+     * @param  \App\Http\Requests\UpdateStukturalRequest  $request
      * @param  \App\Models\Stuktural  $stuktural
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePermissionGroupRequest $request, Stuktural $stuktural)
+    public function update(UpdateStukturalRequest $request, Stuktural $stuktural)
     {
-        Stuktural::find($stuktural->uuid)
-            ->update($request->all());
+        $data = $request->validated();
 
-        return redirect('/permissiongroup')->with('success', 'Permission Group has been updated!');
+        if ($request->photo) {
+            $image = str_replace('data:image/jpeg;base64,', '', $request->photo);
+            $image = base64_decode($image);
+
+            $filename = 'photo_' . time() . '.jpg';
+
+            Storage::disk('public')->put('uploads/stuktural/' . $filename, $image);
+
+            // delete file lama
+            if ($stuktural->photo && Storage::disk('public')->exists('uploads/stuktural/' . $stuktural->photo)) {
+                Storage::disk('public')->delete('uploads/stuktural/' . $stuktural->photo);
+            }
+
+            $data['photo'] = $filename;
+        }
+
+        $stuktural->update($data);
+
+        return redirect('/stuktural')->with('success', 'Struktural has been updated!');
     }
 
     /**
@@ -87,6 +117,6 @@ class StukturalController extends Controller
     public function destroy(Stuktural $stuktural)
     {
         $stuktural->delete();
-        return redirect('/permissiongroup')->with('success', 'Permission Group has been deleted!');
+        return redirect('/stuktural')->with('success', 'Struktural has been deleted!');
     }
 }

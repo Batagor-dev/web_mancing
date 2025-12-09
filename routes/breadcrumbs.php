@@ -262,4 +262,27 @@ Breadcrumbs::for('profil_komunitas.create', function (BreadcrumbTrail $trail) {
     $trail->push('Create', route('profil_komunitas.create'));
 });
 
-// **************************** END ARTICLE ***************************
+// **************************** END KOMUNITAS ***************************
+
+// **************************** Struktural ***************************
+
+// Home > Struktural 
+Breadcrumbs::for('stuktural.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Struktural', route('stuktural.index'));
+});
+
+// Home > Struktural  > [Update]
+Breadcrumbs::for('stuktural.edit', function (BreadcrumbTrail $trail, $stuktural) {
+    $trail->parent('stuktural.index');
+    $trail->push('Update [' . $stuktural->name . ']', route('stuktural.edit', $stuktural));
+});
+
+
+// Home > Struktural > Create
+Breadcrumbs::for('stuktural.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('stuktural.index');
+    $trail->push('Create', route('stuktural.create'));
+});
+
+// **************************** END KOMUNITAS ***************************

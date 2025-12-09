@@ -134,7 +134,7 @@ class MenuSeeder extends Seeder
             'icon'                => 'ri-team-line',
             'status'              => '1',
             'sort'                => '3',
-            'href'                => '/struktural',
+            'href'                => '/stuktural',
         ]);
 
         $galery = Menu::create([
