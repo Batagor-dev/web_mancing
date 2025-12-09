@@ -26,7 +26,10 @@ class RolePermissionSeeder extends Seeder
             'Article',
             'Setting',
             'Banner',
-            'Profil Komunitas'
+            'Profil Komunitas',
+            'Stuktural',
+            'Galery',
+            'Kegiatan',
         ];
 
         foreach ($permissiongroups as $permissiongroup) {
@@ -83,6 +86,21 @@ class RolePermissionSeeder extends Seeder
             'Profil Komunitas Create-10',
             'Profil Komunitas Update-10',
             'Profil Komunitas Delete-10',
+            'Stuktural Access-11',
+            'Stuktural Detail-11',
+            'Stuktural Create-11',
+            'Stuktural Update-11',
+            'Stuktural Delete-11',
+            'Galery Access-12',
+            'Galery Detail-12',
+            'Galery Create-12',
+            'Galery Update-12',
+            'Galery Delete-12',
+            'Kegiatan Access-13',
+            'Kegiatan Detail-13',
+            'Kegiatan Create-13',
+            'Kegiatan Update-13',
+            'Kegiatan Delete-13',
         ];
 
         foreach ($permissions as $permission) {
