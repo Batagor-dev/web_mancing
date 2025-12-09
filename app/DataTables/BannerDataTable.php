@@ -21,7 +21,7 @@ class BannerDataTable extends DataTable
             ->addColumn('photo', function ($banner) {
                 if (!$banner->photo) return '-';
                 $url = asset('storage/' . $banner->photo);
-                return '<img src="'.$url.'" alt="'.$banner->name.'" class="img-thumbnail" style="width:60px; height:60px; object-fit:cover;">';
+                return '<img src="'.$url.'" alt="'.$banner->name.'" class="img-thumbnail" style="width:90px; height:60px; object-fit:cover;">';
             })
 
             // Status Active/Off (opsional, jika ada)

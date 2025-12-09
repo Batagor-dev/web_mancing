@@ -6,6 +6,9 @@ use App\Models\Banner;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\DataTables\BannerDataTable;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class BannerController extends Controller
 {
@@ -40,18 +43,37 @@ class BannerController extends Controller
      */
     public function store(StoreBannerRequest $request)
     {
-        $data = $request->only(['name', 'link']);
+        $data = $request->validated();
 
-        // upload photo
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('banner', 'public');
-        }
+            $file       = $request->file('photo');
+            $extension  = $file->getClientOriginalExtension();
 
-        $data['uuid'] = \Str::uuid();
+            $baseName    = Str::slug($request->name);
+            $websiteName = Str::slug(config('app.name'));
+            $timestamp   = time();
+
+            $path = storage_path('app/public/banner/');
+            if (!is_dir($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            $filename = "{$baseName}-{$websiteName}-{$timestamp}.{$extension}";
+
+            $driver  = new GdDriver();
+            $manager = new ImageManager($driver);
+
+            // resize/crop tetap, walaupun ukuran sudah pas (jaga konsistensi)
+            $resizedImage = $manager->read($file->getRealPath())->cover(1920, 1080);
+
+            file_put_contents($path . $filename, $resizedImage->toJpeg(90));
+
+            $data['photo'] = 'banner/'.$filename;
+        }
 
         Banner::create($data);
 
-        return redirect('/banner')->with('success', 'New Banner has been created!');
+        return redirect()->route('banner.index')->with('success', 'New banner has been created!');
     }
 
 
@@ -79,22 +101,41 @@ class BannerController extends Controller
      */
     public function update(UpdateBannerRequest $request, Banner $banner)
     {
-        $data = $request->only(['name', 'link']);
+        $data = $request->validated();
 
-        // If upload new photo
         if ($request->hasFile('photo')) {
+            $file       = $request->file('photo');
+            $extension  = $file->getClientOriginalExtension();
 
-            // delete old photo
-            if ($banner->photo && file_exists(storage_path('app/public/'.$banner->photo))) {
-                unlink(storage_path('app/public/'.$banner->photo));
+            $baseName    = Str::slug($request->name);
+            $websiteName = Str::slug(config('app.name'));
+            $timestamp   = time();
+
+            $path = storage_path('app/public/banner/');
+            if (!is_dir($path)) {
+                mkdir($path, 0755, true);
             }
 
-            $data['photo'] = $request->file('photo')->store('banner', 'public');
+            $filename = "{$baseName}-{$websiteName}-{$timestamp}.{$extension}";
+
+            $driver  = new GdDriver();
+            $manager = new ImageManager($driver);
+
+            $resizedImage = $manager->read($file->getRealPath())->cover(1920, 1080);
+
+            file_put_contents($path . $filename, $resizedImage->toJpeg(90));
+
+            $data['photo'] = 'banner/'.$filename;
+
+            // hapus foto lama
+            if ($banner->photo && \Storage::disk('public')->exists($banner->photo)) {
+                \Storage::disk('public')->delete($banner->photo);
+            }
         }
 
         $banner->update($data);
 
-        return redirect('/banner')->with('success', 'Banner has been updated!');
+        return redirect()->route('banner.index')->with('success', 'Banner has been updated!');
     }
 
 

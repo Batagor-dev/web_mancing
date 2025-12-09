@@ -15,7 +15,7 @@ class Banner extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'uuid', 'name', 'link', 'photo',
+        'uuid', 'name', 'link', 'photo','status'
     ];
 
     public function getRouteKeyName()

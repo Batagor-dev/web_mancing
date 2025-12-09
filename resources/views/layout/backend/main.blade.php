@@ -60,6 +60,12 @@
 
     <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/app-academy-details.css')}}" />
 
+    <!-- Css Fancyapps -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+    {{-- Css DropZone --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/min/dropzone.min.css">
+
     <!-- Helpers -->
     <script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -122,6 +128,12 @@
     <script src="{{asset('assets/vendor/libs/@form-validation/bootstrap5.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/@form-validation/auto-focus.js')}}"></script>
 
+    {{-- JS Fancybox --}}
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    {{-- Js DropZone --}}
+    <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/min/dropzone.min.js"></script>
+    
     <!-- Main JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
     
