@@ -26,7 +26,7 @@ class UpdateBannerRequest extends FormRequest
         return [
             'name'  => 'required|max:50',
             'link'  => 'nullable|max:255|url',
-            'photo' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'status' => 'nullable|boolean',
         ];
     }

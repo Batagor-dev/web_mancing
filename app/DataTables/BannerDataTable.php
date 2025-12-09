@@ -26,7 +26,15 @@ class BannerDataTable extends DataTable
 
             // Status Active/Off (opsional, jika ada)
             ->addColumn('status', function ($banner) {
-                return '<span class="badge bg-success">Active</span>';
+                if ($banner->status == 1) {
+                    return '<span class="badge bg-success rounded-pill px-3 py-2">
+                                <i class="ri-checkbox-circle-line me-1"></i> Active
+                            </span>';
+                }
+
+                return '<span class="badge bg-danger rounded-pill px-3 py-2">
+                            <i class="ri-close-circle-line me-1"></i> Non Active
+                        </span>';
             })
 
             // Action Button
@@ -109,7 +117,6 @@ class BannerDataTable extends DataTable
             Column::make('name')->title('Banner Name'),
             Column::make('photo')->title('Photo')->orderable(false)->searchable(false),
             Column::make('link')->title('Link'),
-            Column::make('created_at')->title('Created At'),
             Column::make('status')->title('Status')->orderable(false)->searchable(false),
             Column::computed('action')
                 ->title('Action')

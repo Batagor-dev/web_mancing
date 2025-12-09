@@ -77,6 +77,28 @@
                         @endisset
                     </div>
                 </div>
+                <div class="row mb-4">
+                    <label class="col-sm-3 col-form-label" for="photo">Active</label>
+                    <div class="col-sm-9">
+                        <input type="hidden" name="status" value="0">
+                        <label class="switch switch-lg">
+                        <input 
+                            type="checkbox" 
+                            class="switch-input" 
+                            name="status" 
+                            value="1"
+                            {{ old('status', $banner_data->status ?? 0) == 1 ? 'checked' : '' }}
+                        />
+                        <span class="switch-toggle-slider">
+                            <span class="switch-on"></span>
+                            <span class="switch-off"></span>
+                        </span>
+                    </label>
+                    </div>
+                </div>
+
+                
+
 
                 <!-- Submit / Cancel -->
                 <div class="pt-6">
