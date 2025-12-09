@@ -241,28 +241,6 @@ Breadcrumbs::for('banner.create', function (BreadcrumbTrail $trail) {
 
 // **************************** END Banner ***************************
 
-// **************************** PROFIL KOMUNITAS ***************************
-
-// Home > Profil Komunitas 
-Breadcrumbs::for('profil_komunitas.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Profil Komunitas', route('profil_komunitas.index'));
-});
-
-// Home > Profil Komunitas  > [Update]
-Breadcrumbs::for('profil_komunitas.edit', function (BreadcrumbTrail $trail, $profilkomunitas) {
-    $trail->parent('profil_komunitas.index');
-    $trail->push('Update [' . $profilkomunitas->title . ']', route('profil_komunitas.edit', $profilkomunitas));
-});
-
-
-// Home > Profil Komunitas  > Create
-Breadcrumbs::for('profil_komunitas.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('profil_komunitas.index');
-    $trail->push('Create', route('profil_komunitas.create'));
-});
-
-// **************************** END KOMUNITAS ***************************
 
 // **************************** Struktural ***************************
 
@@ -275,6 +253,7 @@ Breadcrumbs::for('stuktural.index', function (BreadcrumbTrail $trail) {
 // Home > Struktural  > [Update]
 Breadcrumbs::for('stuktural.edit', function (BreadcrumbTrail $trail, $stuktural) {
     $trail->parent('stuktural.index');
+    dd($stuktural);
     $trail->push('Update [' . $stuktural->name . ']', route('stuktural.edit', $stuktural));
 });
 
@@ -285,4 +264,27 @@ Breadcrumbs::for('stuktural.create', function (BreadcrumbTrail $trail) {
     $trail->push('Create', route('stuktural.create'));
 });
 
-// **************************** END KOMUNITAS ***************************
+// **************************** END Struktural ***************************
+
+// **************************** Profil Komunitas ***************************
+
+// Home > Profil Komunitas 
+Breadcrumbs::for('profil.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profil Komunitas', route('profil.index'));
+});
+
+// Home > Profil Komunitas  > [Update]
+Breadcrumbs::for('profil.edit', function (BreadcrumbTrail $trail, $profil) {
+    $trail->parent('profil.index');
+    $trail->push('Update [' . $profil->judul . ']', route('profil.edit', $profil));
+});
+
+
+// Home > Profil Komunitas > Create
+Breadcrumbs::for('profil.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('profil.index');
+    $trail->push('Create', route('profil.create'));
+});
+
+// **************************** END Profil Komunitas ***************************

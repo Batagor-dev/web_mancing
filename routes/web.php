@@ -46,8 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/article', App\Http\Controllers\ArticleController::class)->parameters([
         'article' => 'article:slug',
     ]);
-
-    Route::resource('/profil_komunitas', App\Http\Controllers\ProfileKomunitasController::class)->except('show');
+    
+    Route::resource('/profil', App\Http\Controllers\ProfilController::class)->except('show');
     Route::resource('/banner', App\Http\Controllers\BannerController::class)->except('show');
     Route::resource('/stuktural', App\Http\Controllers\StukturalController::class)->except('show');
     // Route::prefix('setting')->group(function () {

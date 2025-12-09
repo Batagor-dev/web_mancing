@@ -7,18 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProfileKomunitas extends Model
+class profil extends Model
 {
     use HasFactory, HasUuid, SoftDeletes;
 
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'uuid',
-        'slug',
-        'title',
-        'deskripsi',
-        'photo',
+        'uuid', 'judul', 'deskripsi', 'photo'
     ];
 
     public function getRouteKeyName()

@@ -125,7 +125,7 @@ class MenuSeeder extends Seeder
             'icon'               => 'ri-community-line',
             'status'             => '1',
             'sort'               => '3',
-            'href'               => '/profil_komunitas',
+            'href'               => '/profil',
         ]);
 
         $stuktural = Menu::create([

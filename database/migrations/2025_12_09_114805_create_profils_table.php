@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -12,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profile_komunitas', function (Blueprint $table) {
+        Schema::create('profils', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('slug')->nullable();
-            $table->string('title'); // required
-            $table->text('deskripsi'); // required
-            $table->string('photo'); // required (path file)
+            $table->string('judul', 50);
+            $table->text('deskripsi');
+            $table->string('photo', 255);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_komunitas');
+        Schema::dropIfExists('profils');
     }
 };
