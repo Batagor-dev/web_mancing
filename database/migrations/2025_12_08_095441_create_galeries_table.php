@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('galeries', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+            $table->string('slug')->unique();
+            $table->string('photo'); // required
+            $table->string('title'); // required
+            $table->string('time'); // required (jika ingin datetime, ganti ke ->dateTime())
             $table->timestamps();
         });
     }
