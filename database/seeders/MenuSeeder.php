@@ -127,5 +127,33 @@ class MenuSeeder extends Seeder
             'sort'               => '3',
             'href'               => '/profil_komunitas',
         ]);
+
+        $stuktural = Menu::create([
+            'nama_menu'           => 'Struktural',
+            'permission_group_id' => 11,
+            'icon'                => 'ri-team-line',
+            'status'              => '1',
+            'sort'                => '3',
+            'href'                => '/struktural',
+        ]);
+
+        $galery = Menu::create([
+            'nama_menu'           => 'Galery',
+            'permission_group_id' => 12,
+            'icon'                => 'ri-image-line',
+            'status'              => '1',
+            'sort'                => '3',
+            'href'                => '/galery',
+        ]);
+
+        $kegiatan = Menu::create([
+            'nama_menu'           => 'Kegiatan',
+            'permission_group_id' => 13,
+            'icon'                => 'ri-calendar-event-line',
+            'status'              => '1',
+            'sort'                => '3',
+            'href'                => '/kegiatan',
+        ]);
+
     }
 }
