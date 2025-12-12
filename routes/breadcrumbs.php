@@ -288,3 +288,25 @@ Breadcrumbs::for('profil.create', function (BreadcrumbTrail $trail) {
 });
 
 // **************************** END Profil Komunitas ***************************
+
+// **************************** GALERY ***************************
+
+// Home > Galery
+Breadcrumbs::for('galery.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Galery', route('galery.index'));
+});
+
+// Home > Galery > [Update]
+Breadcrumbs::for('galery.edit', function (BreadcrumbTrail $trail, $galery) {
+    $trail->parent('galery.index');
+    $trail->push('Update [' . $galery->title . ']', route('galery.edit', $galery));
+});
+
+// Home > Galery > Create
+Breadcrumbs::for('galery.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('galery.index');
+    $trail->push('Create', route('galery.create'));
+});
+
+// **************************** END GALERY ***************************
