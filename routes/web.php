@@ -50,7 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/profil', App\Http\Controllers\ProfilController::class)->except('show');
     Route::resource('/banner', App\Http\Controllers\BannerController::class)->except('show');
     Route::resource('/stuktural', App\Http\Controllers\StukturalController::class)->except('show');
-      Route::resource('/galery', App\Http\Controllers\GaleryController::class)->except('show');
+    Route::resource('/galery', App\Http\Controllers\GaleryController::class)->except('show');
+    Route::resource('/kegiatan', App\Http\Controllers\KegiatanController::class)->except('show');
     // Route::prefix('setting')->group(function () {
     //     Route::get('/',[App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
     //     Route::get('/create',[App\Http\Controllers\SettingController::class, 'create'])->name('setting.create');

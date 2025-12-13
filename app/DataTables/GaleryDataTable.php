@@ -101,8 +101,8 @@ class GaleryDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false)->width(30),
-            Column::make('title')->title('Title'),
             Column::make('photo')->title('Photo')->orderable(false)->searchable(false),
+            Column::make('title')->title('Title'),
             Column::make('time')->title('Time'),
             Column::computed('action')
                 ->title('Action')

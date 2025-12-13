@@ -310,3 +310,26 @@ Breadcrumbs::for('galery.create', function (BreadcrumbTrail $trail) {
 });
 
 // **************************** END GALERY ***************************
+
+// **************************** KEGIATAN ***************************
+
+// Home > Kegiatan
+Breadcrumbs::for('kegiatan.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Kegiatan', route('kegiatan.index'));
+});
+
+// Home > Kegiatan > [Update]
+Breadcrumbs::for('kegiatan.edit', function (BreadcrumbTrail $trail, $kegiatan) {
+    $trail->parent('kegiatan.index');
+    $trail->push('Update [' . $kegiatan->title . ']', route('kegiatan.edit', $kegiatan));
+});
+
+// Home > Kegiatan > Create
+Breadcrumbs::for('kegiatan.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('kegiatan.index');
+    $trail->push('Create', route('kegiatan.create'));
+});
+
+// **************************** END KEGIATAN ***************************
+

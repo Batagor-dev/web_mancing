@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->id();
+
+            $table->uuid('uuid')->unique();
+            $table->string('slug')->unique();
+            $table->string('photo'); 
+            $table->string('title'); 
+            $table->text('deskripsi'); 
+            $table->dateTime('waktu')->nullable();  
+            $table->softDeletes();
             $table->timestamps();
         });
     }
