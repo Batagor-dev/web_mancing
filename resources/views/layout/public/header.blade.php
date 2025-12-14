@@ -112,7 +112,6 @@
             <button class="navbar-toggler border-0 d-lg-none" type="button" 
                     data-bs-toggle="offcanvas" data-bs-target="#mobileSideNav">
                 <span class="navbar-toggler-icon"></span>
-                <span class="badge bg-primary rounded-pill ms-1" id="mobile-menu-badge">6</span>
             </button>
         </div>
     </nav>

@@ -17,6 +17,10 @@ class HomeController extends Controller
             'banners' => Banner::where('status', 1)
                 ->orderBy('created_at', 'desc')
                 ->get(),
+
+            // Profil singkat
+            'profil' => Profil::latest()->first(),
+ 
         ];
 
         return view('home.index', $data);
