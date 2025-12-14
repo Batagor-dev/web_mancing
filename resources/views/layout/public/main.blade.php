@@ -21,7 +21,7 @@
     @include('layout.public.header')
     
     <!-- Main Content -->
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
     
