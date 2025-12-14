@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profils', function (Blueprint $table) {
+        Schema::create('profile_comunity', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('judul', 50);
-            $table->text('deskripsi');
-            $table->string('photo', 255);
+
+            $table->string('judul', 50);       
+            $table->text('deskripsi');         
+            $table->string('photo', 255);      
+            $table->json('poin')->nullable();  
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profils');
+        Schema::dropIfExists('profile_comunity');
     }
 };

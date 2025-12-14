@@ -48,10 +48,16 @@ class ProfilController extends Controller
                 ->store('uploads/profil', 'public');
         }
 
+        // pastikan poin tersimpan sebagai array
+        if ($request->has('poin')) {
+            $data['poin'] = $request->poin;
+        }
+
         Profil::create($data);
 
         return redirect('/profil')->with('success', 'New Struktural has been created!');
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -81,20 +87,24 @@ class ProfilController extends Controller
 
         if ($request->hasFile('photo')) {
 
-            // HAPUS FILE LAMA JIKA ADA
             if ($profil->photo && Storage::disk('public')->exists($profil->photo)) {
                 Storage::disk('public')->delete($profil->photo);
             }
 
-            // SIMPAN FILE BARU
             $data['photo'] = $request->file('photo')
                 ->store('uploads/profil', 'public');
+        }
+
+        // update poin
+        if ($request->has('poin')) {
+            $data['poin'] = $request->poin;
         }
 
         $profil->update($data);
 
         return redirect('/profil')->with('success', 'Struktural has been updated!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -104,7 +114,13 @@ class ProfilController extends Controller
      */
     public function destroy(Profil $profil)
     {
+        if ($profil->photo && Storage::disk('public')->exists($profil->photo)) {
+            Storage::disk('public')->delete($profil->photo);
+        }
+
         $profil->delete();
+
         return redirect('/profil')->with('success', 'Struktural has been deleted!');
     }
+
 }

@@ -58,6 +58,73 @@
                     </div>
                 </div>
 
+                {{-- Poin --}}
+                <div class="row mb-4">
+                    <label class="col-sm-3 col-form-label">Poin Komunitas</label>
+                    <div class="col-sm-9">
+
+                        <div id="poin-wrapper">
+
+                            @php
+                                $poinOld = old('poin', $profil_data->poin ?? []);
+                            @endphp
+
+                            @forelse($poinOld as $index => $poin)
+                                <div class="card mb-3 poin-item">
+                                    <div class="card-body">
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label>Icon Bootstrap</label>
+                                                <input type="text"
+                                                    name="poin[{{ $index }}][icon]"
+                                                    class="form-control"
+                                                    placeholder="bi-people"
+                                                    value="{{ $poin['icon'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Judul</label>
+                                                <input type="text"
+                                                    name="poin[{{ $index }}][judul]"
+                                                    class="form-control"
+                                                    placeholder="Judul poin"
+                                                    value="{{ $poin['judul'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Deskripsi</label>
+                                                <input type="text"
+                                                    name="poin[{{ $index }}][deskripsi]"
+                                                    class="form-control"
+                                                    placeholder="Deskripsi poin"
+                                                    value="{{ $poin['deskripsi'] ?? '' }}">
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-sm btn-danger remove-poin">
+                                            <i class="bi bi-trash"></i> Hapus
+                                        </button>
+
+                                    </div>
+                                </div>
+                            @empty
+                                {{-- kosong, nanti diisi via JS --}}
+                            @endforelse
+
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary" id="add-poin">
+                            <i class="bi bi-plus"></i> Tambah Poin
+                        </button>
+
+                        @error('poin')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                </div>
+
                 {{-- Photo --}}
                 <div class="row mb-4">
                     <label class="col-sm-3 col-form-label" for="photo">Photo</label>
@@ -109,20 +176,62 @@
 @push('scripts')
     {{-- JS preview foto --}}
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const input = document.getElementById('photo');
-            const preview = document.getElementById('new-photo-preview').querySelector('img');
-            const wrapper = document.getElementById('new-photo-preview');
+    document.addEventListener('DOMContentLoaded', function () {
 
-            input.addEventListener('change', e => {
-                document.querySelector('.old-photo-wrapper')?.classList.add('d-none');
+        let poinIndex = {{ count(old('poin', $profil_data->poin ?? [])) }};
 
-                const file = e.target.files[0];
-                if (!file) return;
+        document.getElementById('add-poin').addEventListener('click', function () {
 
-                preview.src = URL.createObjectURL(file);
-                wrapper.classList.remove('d-none');
-            });
+            const wrapper = document.getElementById('poin-wrapper');
+
+            const html = `
+                <div class="card mb-3 poin-item">
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label>Icon Bootstrap</label>
+                                <input type="text"
+                                    name="poin[${poinIndex}][icon]"
+                                    class="form-control"
+                                    placeholder="bi-people">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Judul</label>
+                                <input type="text"
+                                    name="poin[${poinIndex}][judul]"
+                                    class="form-control"
+                                    placeholder="Judul poin">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Deskripsi</label>
+                                <input type="text"
+                                    name="poin[${poinIndex}][deskripsi]"
+                                    class="form-control"
+                                    placeholder="Deskripsi poin">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-sm btn-danger remove-poin">
+                            <i class="bi bi-trash"></i> Hapus
+                        </button>
+
+                    </div>
+                </div>
+            `;
+
+            wrapper.insertAdjacentHTML('beforeend', html);
+            poinIndex++;
         });
+
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-poin')) {
+                e.target.closest('.poin-item').remove();
+            }
+        });
+    });
     </script>
+
 @endpush

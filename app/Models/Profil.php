@@ -11,10 +11,20 @@ class Profil extends Model
 {
     use HasFactory, HasUuid, SoftDeletes;
 
+    protected $table = 'profile_comunity'; 
+
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'uuid', 'judul', 'deskripsi', 'photo'
+        'uuid',
+        'judul',
+        'deskripsi',
+        'photo',
+        'poin', 
+    ];
+
+    protected $casts = [
+        'poin' => 'array', 
     ];
 
     public function getRouteKeyName()
