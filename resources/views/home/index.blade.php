@@ -71,12 +71,12 @@
                             Tentang Kami
                         </h6>
                         <h2 class="display-5 fw-bold text-dark mb-0">
-                           {{ $profil->judul }}
+                           {{ $profil->judul ?? "-" }}
                         </h2>
                     </div>
                     
                     <p class="lead text-muted mb-5">
-                        {{ $profil->deskripsi }}
+                        {{ $profil->deskripsi ?? "-" }}
                     </p>
                     
                    <div class="mb-4">
@@ -133,11 +133,20 @@
                 <!-- Kolom kanan: Gambar dan testimoni -->
                 <div class="col-lg-6 position-relative">
                     <div class="position-relative rounded-4 overflow-hidden border border-light shadow-lg">
-                        <img
-                            class="img-fluid w-100"
-                            style="height: 600px; object-fit: cover;"
-                            src="{{ asset('storage/' . $profil->photo) }}"
-                        />
+                        @if (!empty($profil?->photo))
+                            <img
+                                class="img-fluid w-100"
+                                style="height: 600px; object-fit: cover;"
+                                src="{{ asset('storage/' . $profil->photo) }}"
+                                alt="Foto Profil"
+                            >
+                        @else
+                            <div class="d-flex align-items-center justify-content-center bg-secondary text-white"
+                                style="height: 600px;">
+                                <span class="fs-5">Tidak ada photo</span>
+                            </div>
+                        @endif
+
                     </div>
                     
                     <!-- Efek dekoratif -->
@@ -149,26 +158,79 @@
         </div>
     </section>
 
-    <!-- Additional Content -->
+    <!-- Struktur Organisasi -->
     <section class="bg-light py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h2>Tentang Aplikasi Kami</h2>
-                    <p class="lead">
-                        Aplikasi ini dibangun dengan teknologi terbaru untuk memberikan 
-                        pengalaman terbaik bagi pengguna.
-                    </p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Responsive Design</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Fast Performance</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Secure & Reliable</li>
-                    </ul>
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="fw-bold text-dark mb-3">Struktur Organisasi</h2>
+                    <p class="text-muted lead">Tim kepengurusan komunitas pemancing yang berdedikasi</p>
                 </div>
-                <div class="col-md-6">
-                    <img src="https://via.placeholder.com/500x300" alt="About Image" class="img-fluid rounded shadow">
+            </div>
+
+            <div class="position-relative px-4">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+
+                        @forelse ($struktur as $item)
+                            <div class="swiper-slide">
+                                <div class="card member-card border-0 overflow-hidden position-relative h-100" style="aspect-ratio: 3/4;">
+                                    <div class="position-relative w-100 h-100">
+                                        <img
+                                            src="{{ $item->photo 
+                                                ? asset('storage/uploads/stuktural/' . $item->photo) 
+                                                : asset('images/default-user.jpg') }}"
+                                            class="position-absolute top-0 start-0 w-100 h-100"
+                                            style="object-fit: cover;"
+                                            alt="{{ $item->name }}"
+                                        >
+
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end p-4 text-white"
+                                            style="background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3), transparent);">
+
+                                            <div class="mb-2">
+                                                <span class="badge bg-primary bg-opacity-75 px-3 py-2">
+                                                    {{ $item->jabatan ?? 'Jabatan belum diisi' }}
+                                                </span>
+                                            </div>
+
+                                            <h4 class="fw-bold mb-1">
+                                                {{ $item->name ?? 'Nama belum diisi' }}
+                                            </h4>
+
+                                            <p class="mb-0 opacity-75">
+                                                {{ $item->unit ?? 'Unit belum diisi' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            {{-- Kalau struktur kosong --}}
+                            <div class="swiper-slide">
+                                <div class="text-center w-100 py-5">
+                                    <h5 class="text-muted">😶‍🌫️ Struktur organisasi belum diisi</h5>
+                                    <p class="text-muted small">Silakan tambahkan data kepengurusan terlebih dahulu</p>
+                                </div>
+                            </div>
+                        @endforelse
+
+                    </div>
+
+                    <div class="swiper-pagination mt-4"></div>
                 </div>
             </div>
         </div>
     </section>
+
+
+    @push('styles')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <link rel="stylesheet" href="{{asset('forntend/css/struktur.css')}}">
+    @endpush
+
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="{{asset('forntend/js/struktur.js')}}"></script>
+    @endpush
 @endsection

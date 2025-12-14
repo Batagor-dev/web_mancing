@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Profil;
-use App\Models\Struktural;
+use App\Models\Stuktural;
 use App\Models\Gallery;
 use App\Models\Kegiatan;
 
@@ -12,6 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
         $data = [
             // Banner utama
             'banners' => Banner::where('status', 1)
@@ -20,6 +21,8 @@ class HomeController extends Controller
 
             // Profil singkat
             'profil' => Profil::latest()->first(),
+
+            'struktur' => Stuktural::all(),
  
         ];
 
