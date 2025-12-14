@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class profil extends Model
+class Profil extends Model
 {
     use HasFactory, HasUuid, SoftDeletes;
 

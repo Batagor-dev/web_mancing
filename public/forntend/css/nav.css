@@ -1,0 +1,111 @@
+.nav-link {
+transition: all 0.3s ease;
+color: #495057 !important;
+}
+
+.nav-link:hover {
+background-color: rgba(13, 110, 253, 0.1);
+color: #0d6efd !important;
+transform: translateX(5px);
+}
+
+.nav-link.active {
+background-color: rgba(13, 110, 253, 0.15);
+color: #0d6efd !important;
+border-left: 3px solid #0d6efd;
+}
+
+.nav-indicator {
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 0;
+height: 2px;
+background: linear-gradient(90deg, #0d6efd, #6ea8fe);
+transition: width 0.3s ease;
+}
+
+.nav-link:hover .nav-indicator {
+width: 70%;
+}
+
+.logo-icon {
+transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover .logo-icon {
+transform: rotate(15deg);
+}
+
+.avatar {
+font-weight: 600;
+transition: transform 0.3s ease;
+}
+
+.dropdown-toggle:hover .avatar {
+transform: scale(1.1);
+}
+
+.dropdown-menu {
+border: none;
+box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+border-radius: 10px;
+}
+
+.dropdown-item {
+border-radius: 5px;
+margin: 2px 8px;
+width: auto;
+}
+
+.dropdown-item:hover {
+background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Offcanvas Custom Styles */
+.offcanvas {
+border-left: 1px solid #dee2e6;
+}
+
+.offcanvas-header {
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.nav-icon-wrapper {
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+/* Mobile Menu Badge */
+#mobile-menu-badge {
+font-size: 0.6rem;
+padding: 0.25em 0.5em;
+}
+
+/* Tooltip Styles */
+.tooltip-inner {
+border-radius: 8px;
+padding: 6px 12px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+.navbar {
+padding-top: 0.5rem;
+padding-bottom: 0.5rem;
+}
+
+.navbar-toggler {
+padding: 0.25rem 0.5rem;
+font-size: 1rem;
+}
+}
+
+/* Smooth transitions */
+* {
+scroll-behavior: smooth;
+}
