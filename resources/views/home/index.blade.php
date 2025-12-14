@@ -3,61 +3,61 @@
 @section('content')
     <!-- Hero Section -->
     <section class="mb-5 p-2 p-md-4">
-@if(isset($banners) && count($banners) > 0)
-@php $banner = $banners->first(); @endphp
+    @if(isset($banners) && count($banners) > 0)
+    @php $banner = $banners->first(); @endphp
 
-<div class="position-relative overflow-hidden rounded-4 rounded-md-5 min-vh-50 min-vh-md-75">
+    <div class="position-relative overflow-hidden rounded-4 rounded-md-5 min-vh-50 min-vh-md-75">
 
-    <img src="{{ asset('storage/' . $banner->photo) }}"
-         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+        <img src="{{ asset('storage/' . $banner->photo) }}"
+            class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
 
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"></div>
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25"></div>
 
-    <div class="position-relative h-100">
-        <div class="container h-100 d-flex align-items-center">
-            <div class="text-white col-lg-6 pt-3 pt-md-5">
+        <div class="position-relative h-100">
+            <div class="container h-100 d-flex align-items-center p-4">
+                <div class="text-white col-lg-6 pt-3 pt-md-5">
 
-    <span class="badge rounded-pill bg-light bg-opacity-25 text-white 
-                 px-2 px-md-3 py-1 py-md-2 mb-2 mb-md-3">
-        KOLEKSI BARU 2024
-    </span>
+                    <span class="badge rounded-pill bg-light bg-opacity-25 text-white 
+                                px-2 px-md-3 py-1 py-md-2 mb-2 mb-md-3">
+                        KOLEKSI BARU 2024
+                    </span>
 
-    <!-- JUDUL -->
-    <h1 class="fw-bold mb-1 fs-4 fs-md-3 fs-lg-1 lh-sm">
-        Taklukan Samudera
-    </h1>
+                    <!-- JUDUL -->
+                    <h1 class="fw-bold mb-1 fs-4 fs-md-3 fs-lg-1 lh-sm">
+                        Taklukan Samudera
+                    </h1>
 
-    <!-- SUB JUDUL -->
-    <h2 class="fw-light fst-italic mb-2 fs-5 fs-md-4 fs-lg-2 lh-sm">
-        Bersama Kami
-    </h2>
+                    <!-- SUB JUDUL -->
+                    <h2 class="fw-light fst-italic mb-2 fs-5 fs-md-4 fs-lg-2 lh-sm">
+                        Bersama Kami
+                    </h2>
 
-    <!-- DESKRIPSI -->
-    <p class="mb-3 mb-md-4 opacity-75 small lh-sm">
-        APRI adalah rumah bagi para pemancing yang menjadikan laut sebagai guru, 
-        kesabaran sebagai senjata, dan kebersamaan sebagai hasil tangkapan terbaik.
-    </p>
+                    <!-- DESKRIPSI -->
+                    <p class="mb-3 mb-md-4 small lh-sm">
+                        APRI adalah rumah bagi para pemancing yang menjadikan laut sebagai guru, 
+                        kesabaran sebagai senjata, dan kebersamaan sebagai hasil tangkapan terbaik.
+                    </p>
 
-    <!-- BUTTON -->
-    <div class="d-flex gap-2 gap-md-3 flex-wrap">
-        <a href="#" class="btn btn-primary btn-sm btn-md-lg rounded-pill px-3 px-md-4">
-            <i class="bi bi-person-plus me-2"></i>
-            Daftar Sekarang
-        </a>
+                    <!-- BUTTON -->
+                    <div class="d-flex gap-2 gap-md-3 flex-wrap">
+                        <a href="#" class="btn btn-primary btn-sm btn-md-lg rounded-pill px-3 px-md-4">
+                            <i class="bi bi-person-plus me-2"></i>
+                            Daftar Sekarang
+                        </a>
 
-        <a href="#" class="btn btn-outline-light btn-sm btn-md-lg rounded-pill px-3 px-md-4">
-            <i class="bi bi-images me-2"></i>
-            Lihat Kegiatan Kami
-        </a>
-    </div>
+                        <a href="#" class="btn btn-outline-light btn-sm btn-md-lg rounded-pill px-3 px-md-4">
+                            <i class="bi bi-images me-2"></i>
+                            Lihat Kegiatan Kami
+                        </a>
+                    </div>
 
-</div>
+                </div>
 
+            </div>
         </div>
-    </div>
 
-</div>
-@endif
+    </div>
+    @endif
 </section>
 
 
