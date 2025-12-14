@@ -2,55 +2,65 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section">
-        @if(isset($banners) && count($banners) > 0)
-            @php
-                $banner = $banners->first();
-            @endphp
-            <div class="position-relative overflow-hidden mb-5" style="height: 0; padding-bottom: 56.25%;"> <!-- 16:9 Aspect Ratio -->
-                <img 
-                    src="{{ asset('storage/' . $banner->photo) }}" 
-                    alt="{{ $banner->title ?? 'Banner' }}"
-                    class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                    loading="lazy"
-                >
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
-                     style="background: rgba(0, 0, 0, 0.4);">
-                    <div class="container text-center text-white px-3">
-                        <h1 class="display-4 fw-bold text-title-main">Taklukan Samudera</h1>
-                        <h1 class="display-4 fw-bold text-title-sub">Bersama Kami</h1>
-                        <p class="lead mb-4 fs-6 text-center mx-auto w-50">
-                            APRI adalah rumah bagi para pemancing yang menjadikan laut sebagai guru, 
-                            kesabaran sebagai senjata, dan kebersamaan sebagai hasil tangkapan terbaik.
-                        </p>
-                        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-                    <a href="#" class="btn btn-primary btn-lg">
-                        <i class="bi bi-person-plus me-2"></i>
-                        Daftar Sekarang
-                    </a>
+    <section class="mb-5 p-2 p-md-4">
+@if(isset($banners) && count($banners) > 0)
+@php $banner = $banners->first(); @endphp
 
-                    <a href="#" class="btn btn-outline-primary btn-lg">
-                        <i class="bi bi-images me-2"></i>
-                        Lihat Kegiatan Kami
-                    </a>
-                </div>
+<div class="position-relative overflow-hidden rounded-4 rounded-md-5 min-vh-50 min-vh-md-75">
 
-                    </div>
-                </div>
-            </div>
-        @else
-            <!-- Fallback jika tidak ada banner -->
-            <div class="hero-section bg-primary text-center text-white rounded mb-5 py-5">
-                <div class="container">
-                    <h1 class="display-4 fw-bold mb-4">Selamat Datang di {{ settings()['title'] ?? config('app.name') }}</h1>
-                    <p class="lead mb-4">Aplikasi modern berbasis Laravel 10 dengan Bootstrap 5</p>
-                    <a href="#" class="btn btn-light btn-lg text-primary">
-                        <i class="bi bi-arrow-right-circle me-2"></i>Pelajari Lebih Lanjut
-                    </a>
-                </div>
-            </div>
-        @endif
-    </section>
+    <img src="{{ asset('storage/' . $banner->photo) }}"
+         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"></div>
+
+    <div class="position-relative h-100">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="text-white col-lg-6 pt-3 pt-md-5">
+
+    <span class="badge rounded-pill bg-light bg-opacity-25 text-white 
+                 px-2 px-md-3 py-1 py-md-2 mb-2 mb-md-3">
+        KOLEKSI BARU 2024
+    </span>
+
+    <!-- JUDUL -->
+    <h1 class="fw-bold mb-1 fs-4 fs-md-3 fs-lg-1 lh-sm">
+        Taklukan Samudera
+    </h1>
+
+    <!-- SUB JUDUL -->
+    <h2 class="fw-light fst-italic mb-2 fs-5 fs-md-4 fs-lg-2 lh-sm">
+        Bersama Kami
+    </h2>
+
+    <!-- DESKRIPSI -->
+    <p class="mb-3 mb-md-4 opacity-75 small lh-sm">
+        APRI adalah rumah bagi para pemancing yang menjadikan laut sebagai guru, 
+        kesabaran sebagai senjata, dan kebersamaan sebagai hasil tangkapan terbaik.
+    </p>
+
+    <!-- BUTTON -->
+    <div class="d-flex gap-2 gap-md-3 flex-wrap">
+        <a href="#" class="btn btn-primary btn-sm btn-md-lg rounded-pill px-3 px-md-4">
+            <i class="bi bi-person-plus me-2"></i>
+            Daftar Sekarang
+        </a>
+
+        <a href="#" class="btn btn-outline-light btn-sm btn-md-lg rounded-pill px-3 px-md-4">
+            <i class="bi bi-images me-2"></i>
+            Lihat Kegiatan Kami
+        </a>
+    </div>
+
+</div>
+
+        </div>
+    </div>
+
+</div>
+@endif
+</section>
+
+
 
     <!-- Features Section -->
     <section class="py-5">
