@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('galeries', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('slug')->unique();
             $table->string('photo'); 
             $table->string('title'); 
             $table->string('time');  

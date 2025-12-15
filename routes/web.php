@@ -17,7 +17,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');
-
+Route::get('/home/galery', [\App\Http\Controllers\HomeController::class, 'galery']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

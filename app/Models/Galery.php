@@ -14,7 +14,6 @@ class Galery extends Model
 
     protected $fillable = [
         'uuid',
-        'slug',
         'title',
         'photo',
         'time',
@@ -29,22 +28,18 @@ class Galery extends Model
     }
 
     /**
-     * Boot method untuk auto-generate UUID dan slug saat creating
+     * Boot method untuk auto-generate UUID
      */
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function (Galery $galery) {
-            // generate uuid jika belum ada
+
             if (empty($galery->uuid)) {
                 $galery->uuid = (string) Str::uuid();
             }
 
-            // generate slug otomatis dari title jika belum ada
-            if (empty($galery->slug) && !empty($galery->title)) {
-                $galery->slug = Str::slug($galery->title);
-            }
         });
     }
 }

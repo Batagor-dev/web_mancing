@@ -124,3 +124,5 @@ class GaleryController extends Controller
         return redirect('/galery')->with('success', 'Galery has been deleted!');
     }
 }
+
+

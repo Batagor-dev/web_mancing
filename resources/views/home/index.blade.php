@@ -64,6 +64,7 @@
     <section class="py-5" id="tentang">
         <div class="container">
             <div class="row align-items-start">
+
                 <!-- Kolom kiri: Konten -->
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="mb-4">
@@ -71,66 +72,40 @@
                             Tentang Kami
                         </h6>
                         <h2 class="display-5 fw-bold text-dark mb-0">
-                           {{ $profil->judul ?? "-" }}
+                            {{ $profil->judul ?? '-' }}
                         </h2>
                     </div>
-                    
+
                     <p class="lead text-muted mb-5">
-                        {{ $profil->deskripsi ?? "-" }}
+                        {{ $profil->deskripsi ?? '-' }}
                     </p>
-                    
-                   <div class="mb-4">
-                        <div class="d-flex align-items-start mb-4">
-                            <div class="flex-shrink-0 me-4">
-                                <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
-                                    <i class="bi bi-people text-primary fs-3"></i>
+
+                    <!-- POIN (STRUKTUR ASLI, CUMA DINAMIS) -->
+                    <div class="mb-4">
+                        @if(is_array($profil?->poin) && count($profil->poin) > 0)
+                            @foreach($profil->poin as $item)
+                                <div class="d-flex align-items-start mb-4">
+                                    <div class="flex-shrink-0 me-4">
+                                        <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center"
+                                            style="width: 70px; height: 70px;">
+                                            <i class="bi {{ $item['icon'] }} text-primary fs-3"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 text-start">
+                                        <h4 class="fw-bold text-dark mb-2">
+                                            {{ $item['judul'] }}
+                                        </h4>
+                                        <p class="text-muted mb-0">
+                                            {{ $item['deskripsi'] }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h4 class="fw-bold text-dark mb-2">Persaudaraan</h4>
-                                <p class="text-muted mb-0">
-                                    Membangun jaringan pertemanan antar
-                                    pemancing dari seluruh nusantara
-                                    tanpa memandang status.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex align-items-start mb-4">
-                            <div class="flex-shrink-0 me-4">
-                                <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
-                                    <i class="bi bi-water text-primary fs-3"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h4 class="fw-bold text-dark mb-2">Konservasi Alam</h4>
-                                <p class="text-muted mb-0">
-                                    Menjaga ekosistem perairan dengan
-                                    prinsip catch and release untuk
-                                    spesies tertentu.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0 me-4">
-                                <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
-                                    <i class="bi bi-book text-primary fs-3"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 text-start">
-                                <h4 class="fw-bold text-dark mb-2">Edukasi Teknik</h4>
-                                <p class="text-muted mb-0">
-                                    Workshop rutin tentang alat, teknik
-                                    casting, jigging, dan spot mancing
-                                    terbaik.
-                                </p>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
-                
-                <!-- Kolom kanan: Gambar dan testimoni -->
+
+                <!-- Kolom kanan: Gambar -->
                 <div class="col-lg-6 position-relative">
                     <div class="position-relative rounded-4 overflow-hidden border border-light shadow-lg">
                         @if (!empty($profil?->photo))
@@ -146,17 +121,19 @@
                                 <span class="fs-5">Tidak ada photo</span>
                             </div>
                         @endif
-
                     </div>
-                    
+
                     <!-- Efek dekoratif -->
                     <div class="position-absolute top-0 end-0 translate-middle-y bg-primary bg-opacity-10 rounded-circle"
                         style="width: 200px; height: 200px; filter: blur(50px); z-index: -1;">
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
+
 
     <!-- Struktur Organisasi -->
     <section class="bg-light py-5">
@@ -223,10 +200,354 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+<section class="py-5" id="gallery">
+    <div class="container">
+
+        <!-- Judul -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark">Gallery</h2>
+            <p class="text-muted">
+                Dokumentasi kegiatan dan momen kebersamaan
+            </p>
+        </div>
+
+        <!-- Grid Gallery -->
+        <div class="row g-4">
+            @forelse ($galery as $item)
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="gallery-card h-100">
+                        <div class="gallery-image">
+                            <img 
+                                src="{{ asset('storage/' . $item->photo) }}" 
+                                alt="{{ $item->title }}"
+                            >
+
+                            <div class="gallery-overlay">
+                                <h5 class="fw-semibold mb-1">
+                                    {{ $item->title }}
+                                </h5>
+                                <p class="small mb-0">
+                                    {{ \Carbon\Carbon::parse($item->time)->translatedFormat('d F Y') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Belum ada galeri ditampilkan</p>
+                </div>
+            @endforelse
+        </div>
+
+        {{-- ✅ VIEW ALL DI LUAR GRID --}}
+        @if ($totalGalery > 6)
+            <div class="row mt-5">
+                <div class="col-12 col-md-6 col-lg-4 mx-auto">
+                    <a href="{{ url('/home/galery') }}"
+                       class="btn btn-outline-dark w-100 py-3">
+                        View All Gallery
+                    </a>
+                </div>
+            </div>
+        @endif
+
+    </div>
+</section>
+
+
+
+<!-- Events Section -->
+<section class="py-5 bg-white" id="events">
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+            <div>
+                <h2 class="fw-bold mb-1">Upcoming Community Events</h2>
+                <p class="text-muted mb-0">
+                    Ikuti turnamen, workshop, dan kegiatan komunitas terbaru
+                </p>
+            </div>
+        </div>
+
+        <!-- Event Cards -->
+        <div class="row g-4">
+
+            @forelse ($kegiatans as $event)
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="event-card h-100">
+
+                        <!-- Image -->
+                        <div class="event-image position-relative">
+                            <img
+                                src="{{ asset('storage/' . $event->photo) }}"
+                                alt="{{ $event->title }}"
+                            >
+
+                            <!-- Date Badge -->
+                            @if(!empty($event->waktu))
+                                <div class="event-date text-center">
+                                    <span class="month">
+                                        {{ \Carbon\Carbon::parse($event->waktu)->translatedFormat('M') }}
+                                    </span>
+                                    <span class="day">
+                                        {{ \Carbon\Carbon::parse($event->waktu)->format('d') }}
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-4">
+                            <p class="text-muted small mb-2">
+                                <i class="bi bi-calendar-event me-1"></i>
+                                {{ $event->waktu
+                                    ? \Carbon\Carbon::parse($event->waktu)->translatedFormat('d F Y')
+                                    : 'Tanggal belum ditentukan' }}
+                            </p>
+
+                            <h5 class="fw-bold mb-2">
+                                {{ $event->title }}
+                            </h5>
+
+                            <p class="text-muted small mb-4">
+                                {{ \Illuminate\Support\Str::limit(strip_tags($event->deskripsi), 90) }}
+                            </p>
+
+                            <!-- Button Modal -->
+                            <button
+                                class="btn btn-outline-primary w-100 rounded-pill"
+                                data-bs-toggle="modal"
+                                data-bs-target="#eventModal{{ $event->id }}">
+                                Lihat Detail
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal Detail Event -->
+                <div class="modal fade" id="eventModal{{ $event->id }}" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content rounded-4 overflow-hidden">
+
+                            <div class="modal-body p-0">
+                                <img
+                                    src="{{ asset('storage/' . $event->photo) }}"
+                                    class="img-fluid w-100"
+                                    alt="{{ $event->title }}"
+                                >
+                            </div>
+
+                            <div class="modal-body p-4">
+                                <h4 class="fw-bold mb-2">
+                                    {{ $event->title }}
+                                </h4>
+
+                                @if($event->waktu)
+                                    <p class="text-muted small mb-3">
+                                        <i class="bi bi-calendar-event me-1"></i>
+                                        {{ \Carbon\Carbon::parse($event->waktu)->translatedFormat('d F Y, H:i') }}
+                                    </p>
+                                @endif
+
+                                <div class="text-muted lh-lg">
+                                    {!! nl2br(e($event->deskripsi)) !!}
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary mt-4 w-100 rounded-pill"
+                                    data-bs-dismiss="modal">
+                                    Tutup
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                @empty
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Belum ada event yang dijadwalkan</p>
+                    </div>
+                @endforelse
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 position-relative overflow-hidden" id="cta">
+        <div class="container">
+
+            <div class="row align-items-center gy-4">
+
+                <!-- Left Content -->
+                <div class="col-lg-7 text-white">
+                    <span class="badge bg-light bg-opacity-25 mb-3 px-3 py-2 rounded-pill">
+                        Bergabung Bersama Kami
+                    </span>
+
+                    <h2 class="fw-bold display-6 mb-3">
+                        Siap Menjadi Bagian dari Komunitas Kami?
+                    </h2>
+
+                    <p class="lead opacity-75 mb-4">
+                        Daftarkan diri Anda sekarang dan jadilah bagian dari
+                        komunitas yang menjunjung persaudaraan, edukasi,
+                        dan kecintaan terhadap alam.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="javascript:void(0)"
+                        class="btn btn-light btn-lg rounded-pill px-4">
+                            <i class="bi bi-person-plus me-2"></i>
+                            Daftar Sekarang
+                        </a>
+
+                        <a href="https://wa.me/628123456789"
+                        target="_blank"
+                        class="btn btn-outline-light btn-lg rounded-pill px-4">
+                            <i class="bi bi-whatsapp me-2"></i>
+                            Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Decorative -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="cta-card text-white p-4 rounded-4 shadow-lg">
+                        <h5 class="fw-bold mb-3">Kenapa Harus Bergabung?</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                Jaringan pemancing seluruh Indonesia
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                Event & workshop rutin
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                Edukasi & konservasi alam
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                Solidaritas & persaudaraan
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Decorative Blur -->
+        <div class="cta-blur"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5 bg-white" id="contact">
+        <div class="container">
+            <div class="row align-items-start g-5">
+
+                <!-- Left Info -->
+                <div class="col-lg-5">
+                    <h2 class="fw-bold mb-3">Hubungi kami</h2>
+                    <p class="text-muted mb-4">
+                        Punya pertanyaan seputar keanggotaan, event, atau kerja sama?
+                        Jangan ragu untuk menghubungi kami.
+                    </p>
+
+                    <!-- Address -->
+                    <div class="d-flex mb-4">
+                        <div class="contact-icon me-3">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Alamat</h6>
+                            <p class="text-muted mb-0">
+                                Jl. Pantai Samudera No.123<br>
+                                Indonesia
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="d-flex mb-4">
+                        <div class="contact-icon me-3">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email</h6>
+                            <p class="text-muted mb-0">
+                                info@komunitas.com<br>
+                                event@komunitas.com
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="d-flex">
+                        <div class="contact-icon me-3">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Telepon</h6>
+                            <p class="text-muted mb-0">
+                                Senin – Jumat (08.00 – 17.00)<br>
+                                +62 812 3456 7890
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form-card">
+
+                        <form action="javascript:void(0)">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Nama Lengkap</label>
+                                <input type="text" class="form-control" placeholder="Nama Anda">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="email" class="form-control" placeholder="email@example.com">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Pesan</label>
+                                <textarea rows="4" class="form-control" placeholder="Apa yang bisa kami bantu?"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">
+                                Kirim Pesan
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 
     @push('styles')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <link rel="stylesheet" href="{{asset('forntend/css/struktur.css')}}">
+        <link rel="stylesheet" href="{{asset('forntend/css/galery.css')}}">
+        <link rel="stylesheet" href="{{asset('forntend/css/kegiatan.css')}}">
+        <link rel="stylesheet" href="{{asset('forntend/css/cta.css')}}">
     @endpush
 
     @push('scripts')
