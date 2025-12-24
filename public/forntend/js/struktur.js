@@ -1,53 +1,89 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Inisialisasi Swiper
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 20,
         loop: true,
+        speed: 800,
+
         autoplay: {
-            delay: 4000,
+            delay: 3000,
             disableOnInteraction: false,
+            pauseOnMouseEnter: true, // lebih baik diaktifkan untuk UX
         },
+
+        // 🔥 FIX UNTUK WINDOWS SCROLL
+        mousewheel: {
+            enabled: false, // MATIKAN mousewheel control
+            releaseOnEdges: false,
+        },
+        simulateTouch: true,
+        allowTouchMove: true,
+        
+        // Tambahkan ini untuk mencegah scroll halaman
+        touchEventsTarget: 'container',
+        touchRatio: 1,
+        touchAngle: 45,
+        grabCursor: true,
+        
+        // Optional: Tambahkan resistance dan thresholds
+        resistanceRatio: 0,
+        threshold: 10, // minimum jarak drag untuk trigger swipe
+
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
             dynamicBullets: true,
         },
+
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
+
         breakpoints: {
-            // Mobile: 2 cards
             576: {
                 slidesPerView: 2,
-                spaceBetween: 20,
             },
-            // Tablet: 3 cards
             768: {
                 slidesPerView: 3,
-                spaceBetween: 25,
             },
-            // Desktop: 4 cards
             992: {
                 slidesPerView: 4,
-                spaceBetween: 30,
             },
         },
+
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        
+        // Tambahkan event handler untuk mencegah scroll
+        on: {
+            touchStart: function (swiper, event) {
+                // Mencegah default behavior saat menyentuh slider
+                if (event.type === 'touchstart') {
+                    event.stopPropagation();
+                }
+            },
+        }
     });
 
-    // Hover pause autoplay
-    const swiperContainer = document.querySelector(".mySwiper");
-    swiperContainer.addEventListener("mouseenter", function () {
-        swiper.autoplay.stop();
+    // Handler untuk resize
+    window.addEventListener("resize", function () {
+        if (swiper && !swiper.destroyed) {
+            swiper.update();
+            if (swiper.autoplay && swiper.autoplay.running) {
+                swiper.autoplay.start();
+            }
+        }
     });
 
-    swiperContainer.addEventListener("mouseleave", function () {
-        swiper.autoplay.start();
-    });
-
-    // Update ukuran swiper setelah semua gambar dimuat
-    window.addEventListener("load", function () {
-        swiper.update();
-    });
+    // 🔥 EXTRA FIX: Tambahkan handler untuk mencegah wheel scroll pada swiper
+    const swiperContainer = document.querySelector('.mySwiper');
+    if (swiperContainer) {
+        swiperContainer.addEventListener('wheel', function(e) {
+            e.stopPropagation();
+            // Jika benar-benar ingin mencegah semua wheel scroll di swiper
+            // return false;
+        }, { passive: false });
+    }
 });
