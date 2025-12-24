@@ -108,77 +108,218 @@
     </div>
 </div>
 
-{{-- Modal Cropper --}}
+<!-- Modal Cropper -->
 <div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title">Crop Foto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+            <!-- HEADER -->
+            <div class="modal-header">
+                <h5 class="modal-title fw-semibold">
+                    <i class="bx bx-crop me-2"></i> Crop Foto Profil
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-      <div class="modal-body">
-        <img id="cropper-image" style="max-width: 100%;">
-      </div>
+            <!-- BODY -->
+            <div class="modal-body">
+                <div class="cropper-container" style="height: 500px; overflow: hidden; position: relative;">
+                    <img id="cropper-image" class="img-fluid w-100 h-100" style="object-fit: contain;">
+                </div>
+            </div>
 
-      <div class="modal-footer">
-        <button type="button" id="crop-btn" class="btn btn-primary">Crop & Gunakan</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-      </div>
+            <!-- FOOTER -->
+            <div class="modal-footer justify-content-between">
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="rotate-left">
+                        <i class="bx bx-rotate-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="rotate-right">
+                        <i class="bx bx-rotate-right"></i>
+                    </button>
+                </div>
 
+                <div class="text-muted small">
+                    Ratio: 1:1
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-outline-secondary me-2"
+                        data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="button" id="crop-btn" class="btn btn-primary">
+                        Crop & Simpan
+                    </button>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 
 @endsection
 
+@push('styles')
+<style>
+    .cropper-container {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .cropper-view-box,
+    .cropper-face {
+        border-radius: 50%;
+    }
+    
+    .cropper-view-box {
+        outline: 2px solid #007bff;
+        outline-color: rgba(0, 123, 255, 0.75);
+    }
+    
+    .cropper-line {
+        background-color: #007bff;
+    }
+    
+    .cropper-point {
+        background-color: #007bff;
+        width: 10px;
+        height: 10px;
+    }
+</style>
+@endpush
+
 @push('scripts')
     <script>
         let cropper;
-        const input = document.getElementById("photo-input");
-        const modal = new bootstrap.Modal(document.getElementById("cropperModal"));
-        const cropperImage = document.getElementById("cropper-image");
-        const preview = document.getElementById("preview-cropped");
-        const hidden = document.getElementById("photo-cropped-hidden");
 
-        input.addEventListener("change", function(e) {
-            // hilangkan preview foto lama
-            document.querySelector('.old-photo-wrapper')?.classList.add('d-none');
+        const input        = document.getElementById('photo-input');
+        const modalEl      = document.getElementById('cropperModal');
+        const modal        = new bootstrap.Modal(modalEl);
+        const image        = document.getElementById('cropper-image');
+        const preview      = document.getElementById('preview-cropped');
+        const hiddenInput  = document.getElementById('photo-cropped-hidden');
+        const cropBtn      = document.getElementById('crop-btn');
+        const rotateLeft   = document.getElementById('rotate-left');
+        const rotateRight  = document.getElementById('rotate-right');
 
+        input.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (!file) return;
 
-            const url = URL.createObjectURL(file);
-            cropperImage.src = url;
+            // Validasi ukuran file (max 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Ukuran file maksimal 2MB');
+                input.value = '';
+                return;
+            }
 
+            // Validasi tipe file
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!validTypes.includes(file.type)) {
+                alert('Format file harus JPG, JPEG, PNG, atau WEBP');
+                input.value = '';
+                return;
+            }
+
+            // hide foto lama kalau ada
+            document.querySelector('.old-photo-wrapper')?.classList.add('d-none');
+
+            // Hapus cropper lama jika ada
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            image.src = URL.createObjectURL(file);
             modal.show();
-
-            modal._element.addEventListener('shown.bs.modal', function () {
-                cropper = new Cropper(cropperImage, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    dragMode: 'move',
-                });
-            }, { once: true });
         });
 
-        document.getElementById("crop-btn").addEventListener("click", function () {
+        modalEl.addEventListener('shown.bs.modal', function () {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 1,
+                responsive: true,
+                restore: false,
+                center: true,
+                highlight: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+                minContainerWidth: 400,
+                minContainerHeight: 400,
+                ready: function() {
+                    // Reset posisi crop box ke tengah
+                    const containerData = cropper.getContainerData();
+                    const cropBoxData = {
+                        width: Math.min(containerData.width, containerData.height),
+                        height: Math.min(containerData.width, containerData.height),
+                    };
+                    
+                    cropper.setCropBoxData({
+                        left: (containerData.width - cropBoxData.width) / 2,
+                        top: (containerData.height - cropBoxData.height) / 2,
+                        width: cropBoxData.width,
+                        height: cropBoxData.height
+                    });
+                }
+            });
+        });
+
+        modalEl.addEventListener('hidden.bs.modal', function () {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+            
+            // Reset input file
+            input.value = '';
+            
+            // Hapus URL object
+            if (image.src.startsWith('blob:')) {
+                URL.revokeObjectURL(image.src);
+            }
+        });
+
+        // Rotate kiri
+        rotateLeft.addEventListener('click', function() {
+            if (cropper) {
+                cropper.rotate(-90);
+            }
+        });
+
+        // Rotate kanan
+        rotateRight.addEventListener('click', function() {
+            if (cropper) {
+                cropper.rotate(90);
+            }
+        });
+
+        cropBtn.addEventListener('click', function () {
+            if (!cropper) return;
+
             const canvas = cropper.getCroppedCanvas({
                 width: 500,
                 height: 500,
+                fillColor: '#fff',
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high'
             });
 
-            const base64 = canvas.toDataURL("image/jpeg", 0.9);
+            // Konversi ke base64 dengan kualitas 0.9 (90%)
+            const base64 = canvas.toDataURL('image/jpeg', 0.9);
 
+            // Tampilkan preview
             preview.src = base64;
-            preview.classList.remove("d-none");
+            preview.classList.remove('d-none');
 
-            hidden.value = base64;
+            // Simpan ke hidden input
+            hiddenInput.value = base64;
 
+            // Tutup modal
             modal.hide();
-
-            cropper.destroy();
         });
     </script>
 @endpush

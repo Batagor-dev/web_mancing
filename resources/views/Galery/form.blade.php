@@ -68,29 +68,39 @@
                 </div>
             </div>
 
-
             {{-- Photo --}}
             <div class="row mb-4">
                 <label class="col-sm-3 col-form-label" for="photo">Photo</label>
                 <div class="col-sm-9">
 
                     <input class="form-control @error('photo') is-invalid @enderror"
-                           type="file"
-                           id="photo"
-                           name="photo"
-                           accept="image/*">
+                        type="file"
+                        id="photo"
+                        name="photo"
+                        accept="image/*">
 
                     @error('photo')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
 
-                    {{-- Preview photo saat edit --}}
-                    @isset($galery_data->photo)
-                        <img src="{{ asset('storage/' . $galery_data->photo) }}" class="mt-3" width="120">
-                    @endisset
+                    {{-- Preview --}}
+                    <div class="mt-3">
+                        {{-- Foto lama (edit) --}}
+                        @isset($galery_data->photo)
+                            <img id="old-preview"
+                                src="{{ asset('storage/' . $galery_data->photo) }}"
+                                class="rounded border mb-2"
+                                style="width:120px;height:120px;object-fit:cover">
+                        @endisset
+
+                        {{-- Preview baru --}}
+                        <img id="photo-preview"
+                            class="rounded border d-none"
+                            style="width:120px;height:120px;object-fit:cover">
+                    </div>
+
                 </div>
             </div>
-
 
             {{-- Buttons --}}
             <div class="pt-6">
@@ -110,3 +120,24 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    const inputPhoto   = document.getElementById('photo');
+    const newPreview   = document.getElementById('photo-preview');
+    const oldPreview   = document.getElementById('old-preview');
+
+    inputPhoto.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // hide foto lama kalau ada
+        if (oldPreview) {
+            oldPreview.classList.add('d-none');
+        }
+
+        newPreview.src = URL.createObjectURL(file);
+        newPreview.classList.remove('d-none');
+    });
+</script>
+@endpush

@@ -11,7 +11,7 @@ class Profil extends Model
 {
     use HasFactory, HasUuid, SoftDeletes;
 
-    protected $table = 'profile_comunity'; 
+    protected $table = 'profils'; 
 
     protected $guarded = ['id'];
 

@@ -20,42 +20,42 @@
             <div class="d-none d-lg-flex align-items-center">
                 <ul class="navbar-nav me-4">
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#hero" 
                            data-bs-toggle="tooltip" title="Home">
                             <i class="bi bi-house me-1"></i> Home
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#about" 
                            data-bs-toggle="tooltip" title="Profile">
                             <i class="bi bi-info-circle me-1"></i> Profile
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#struktur" 
                            data-bs-toggle="tooltip" title="Struktur">
                             <i class="bi bi-diagram-3 me-1"></i> Struktur
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#gallery" 
                            data-bs-toggle="tooltip" title="Gallery">
                             <i class="bi bi-images me-1"></i> Gallery
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#events" 
                            data-bs-toggle="tooltip" title="Kegiatan">
                             <i class="bi bi-calendar-event me-1"></i> Kegiatan
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="#contact" 
                            data-bs-toggle="tooltip" title="Kontak">
                             <i class="bi bi-envelope me-1"></i> Kontak
                             <span class="nav-indicator"></span>
@@ -160,7 +160,7 @@
                     <small class="text-uppercase text-muted">Main Menu</small>
                 </div>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#home">
                     <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-house text-primary"></i>
                     </div>
@@ -171,7 +171,7 @@
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#about">
                     <div class="nav-icon-wrapper bg-info bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-info-circle text-info"></i>
                     </div>
@@ -182,7 +182,7 @@
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#struktur">
                     <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-diagram-3 text-success"></i>
                     </div>
@@ -193,7 +193,7 @@
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#gallery">
                     <div class="nav-icon-wrapper bg-warning bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-images text-warning"></i>
                     </div>
@@ -204,7 +204,7 @@
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#events">
                     <div class="nav-icon-wrapper bg-danger bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-calendar-event text-danger"></i>
                     </div>
@@ -215,7 +215,7 @@
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#contact">
                     <div class="nav-icon-wrapper bg-secondary bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="bi bi-envelope text-secondary"></i>
                     </div>

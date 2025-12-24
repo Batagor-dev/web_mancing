@@ -253,7 +253,6 @@ Breadcrumbs::for('stuktural.index', function (BreadcrumbTrail $trail) {
 // Home > Struktural  > [Update]
 Breadcrumbs::for('stuktural.edit', function (BreadcrumbTrail $trail, $stuktural) {
     $trail->parent('stuktural.index');
-    dd($stuktural);
     $trail->push('Update [' . $stuktural->name . ']', route('stuktural.edit', $stuktural));
 });
 
