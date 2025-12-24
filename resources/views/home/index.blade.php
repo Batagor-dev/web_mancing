@@ -1,3 +1,4 @@
+{{-- Index --}}
 @extends('layout.public.main')
 
 @section('content')
