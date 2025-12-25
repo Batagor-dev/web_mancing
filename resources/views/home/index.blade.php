@@ -12,15 +12,18 @@
         @if(isset($banners) && count($banners) > 0)
         @php $banner = $banners->first(); @endphp
 
-        <div class="position-relative overflow-hidden rounded-4 rounded-md-5 min-vh-50 min-vh-md-75 hero-container">
+        <div class="position-relative overflow-hidden rounded-4 rounded-md-5 min-vh-50 min-vh-md-75 hero-container" 
+            style="z-index: 1;"> <!-- TAMBAHKAN INI -->
 
             <img src="{{ asset('storage/' . $banner->photo) }}"
                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover hero-image"
-                data-aos="zoom-out" data-aos-duration="1500">
+                data-aos="zoom-out" data-aos-duration="1500"
+                style="z-index: 1;"> <!-- TAMBAHKAN INI -->
 
-            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25" 
+                style="z-index: 2;"></div> <!-- TAMBAHKAN INI -->
 
-            <div class="position-relative h-100">
+            <div class="position-relative h-100" style="z-index: 3;"> <!-- TAMBAHKAN INI -->
                 <div class="container h-100 d-flex align-items-center p-4">
                     <div class="text-white col-lg-6 pt-3 pt-md-5 hero-content">
 
@@ -300,7 +303,7 @@
                         Event Mendatang
                     </h6>
                     <h4 class="display-6 fw-bold text-dark mb-0 events-title">
-                       Siapkan diri Anda untuk acara seru bersama kami
+                    Siapkan diri Anda untuk acara seru bersama kami
                     </h4>
                 </div>
             </div>
@@ -310,8 +313,8 @@
 
                 @forelse ($kegiatans as $event)
                     <div class="col-12 col-md-6 col-lg-4 event-item" 
-                         data-aos="zoom-in" 
-                         data-aos-delay="{{ $loop->index * 100 }}">
+                        data-aos="zoom-in" 
+                        data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="event-card h-100">
 
                             <!-- Image -->
@@ -398,19 +401,13 @@
                                         {!! nl2br(e($event->deskripsi)) !!}
                                     </div>
 
-                                    <div class="d-flex gap-2 mt-4">
+                                    <!-- Tombol Tutup Full Width -->
+                                    <div class="mt-4">
                                         <button
                                             type="button"
-                                            class="btn btn-primary rounded-pill flex-grow-1"
-                                            onclick="window.location.href='{{ route('register') }}'">
-                                            <i class="bi bi-person-plus me-2"></i>
-                                            Daftar Event
-                                        </button>
-                                        
-                                        <button
-                                            type="button"
-                                            class="btn btn-outline-secondary rounded-pill"
+                                            class="btn btn-outline-secondary w-100 rounded-pill py-3"
                                             data-bs-dismiss="modal">
+                                            <i class="bi bi-x-lg me-2"></i>
                                             Tutup
                                         </button>
                                     </div>

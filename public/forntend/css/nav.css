@@ -1,3 +1,17 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+}
+
+.navbar {
+    position: relative; /* cukup relative */
+    background-color: #fff;
+}
+
+
 .nav-link {
 transition: all 0.3s ease;
 color: #495057 !important;
@@ -78,6 +92,17 @@ height: 40px;
 display: flex;
 align-items: center;
 justify-content: center;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    background-color: #fff;
+}
+
+section {
+    scroll-margin-top: 90px;
 }
 
 /* Mobile Menu Badge */

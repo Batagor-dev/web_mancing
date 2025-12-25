@@ -1,6 +1,6 @@
-<header>
+<header> <!-- TAMBAHKAN INI -->
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 nav-header" > <!-- TAMBAHKAN INI -->
         <div class="container">
             <!-- Brand/Logo -->
             <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
@@ -17,45 +17,45 @@
 
             
             <!-- Desktop Navigation -->
-            <div class="d-none d-lg-flex align-items-center">
+            <div class="d-none d-lg-flex align-items-center" style="position: relative; z-index: 1051;"> <!-- TAMBAHKAN INI -->
                 <ul class="navbar-nav me-4">
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#hero" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#home' : route('home') . '#home' }}" 
                            data-bs-toggle="tooltip" title="Home">
                             <i class="bi bi-house me-1"></i> Home
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#about" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#profil' : route('home') . '#profil' }}" 
                            data-bs-toggle="tooltip" title="Profile">
                             <i class="bi bi-info-circle me-1"></i> Profile
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#struktur" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#struktur' : route('home') . '#struktur' }}"
                            data-bs-toggle="tooltip" title="Struktur">
                             <i class="bi bi-diagram-3 me-1"></i> Struktur
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#gallery" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#gallery' : route('home') . '#gallery' }}"
                            data-bs-toggle="tooltip" title="Gallery">
                             <i class="bi bi-images me-1"></i> Gallery
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#events" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#events' : route('home') . '#events' }}" 
                            data-bs-toggle="tooltip" title="Kegiatan">
                             <i class="bi bi-calendar-event me-1"></i> Kegiatan
                             <span class="nav-indicator"></span>
                         </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="#contact" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#contact' : route('home') . '#contact' }}"
                            data-bs-toggle="tooltip" title="Kontak">
                             <i class="bi bi-envelope me-1"></i> Kontak
                             <span class="nav-indicator"></span>
@@ -64,28 +64,52 @@
                 </ul>
                 
                 <!-- Auth Buttons Desktop -->
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="position: relative; z-index: 1051;">
                     @auth
-                        <div class="dropdown">
+                        <div class="dropdown" style="position: relative; z-index: 1052;">
                             <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" 
                                id="userDropdown" data-bs-toggle="dropdown">
-                                <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                     style="width: 36px; height: 36px;">
-                                    {{ substr(Auth::user()->name, 0, 1) }}
-                                </div>
+                                
+                                <!-- AVATAR SEBELUMNYA -->
+                                @if(Auth::user()->foto == '1.png')
+                                    <img 
+                                        src="{{ asset('assets/img/avatars/' . Auth::user()->foto) }}" 
+                                        alt="avatar" 
+                                        class="rounded-circle me-2"
+                                        style="width: 36px; height: 36px; object-fit: cover;"
+                                    />
+                                @else
+                                    <img 
+                                        src="{{ asset('storage/uploads/avatars/' . Auth::user()->foto) }}" 
+                                        alt="avatar" 
+                                        class="rounded-circle me-2"
+                                        style="width: 36px; height: 36px; object-fit: cover;"
+                                    />
+                                @endif
+                                
                                 <span class="text-dark fw-medium">{{ Auth::user()->name }}</span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0" 
+                                aria-labelledby="userDropdown"
+                                style="z-index: 1053; position: absolute;">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <i class="bi bi-person me-2"></i> Profile
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('profil_security.index') }}">
+                                        <i class="bi bi-person me-2"></i> Profil Saya
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <i class="bi bi-gear me-2"></i> Settings
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('profil_security.index') }}">
+                                        <i class="bi bi-gear me-2"></i> Pengaturan
                                     </a>
                                 </li>
+                                @if(auth()->user()->hasRole('Super Admin|Admin'))
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('dashboard') }}">
+                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard Admin
+                                    </a>
+                                </li>
+                                @endif
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" id="logout-form">
@@ -117,177 +141,272 @@
     </nav>
     
     <!-- Mobile Side Navigation (Offcanvas) -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileSideNav" 
-         aria-labelledby="mobileSideNavLabel">
-        <div class="offcanvas-header border-bottom">
-            <div class="d-flex align-items-center">
-                <img 
-                    src="{{ asset('storage/' . settings()['favicon']) }}" 
-                    alt="Logo"
-                    style="height: 40px; width: auto;"
-                    class="me-3"
-                >
-                <div>
-                    <h5 class="offcanvas-title fw-bold mb-0" id="mobileSideNavLabel">
-                        {{ settings()['title'] ?? 'MyApp' }}
-                    </h5>
-                    <small class="text-muted">Navigation Menu</small>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileSideNav" 
+     aria-labelledby="mobileSideNavLabel"
+     style="z-index: 1055;">
+    <div class="offcanvas-header border-bottom">
+        <div class="d-flex align-items-center">
+            <img 
+                src="{{ asset('storage/' . settings()['favicon']) }}" 
+                alt="Logo"
+                style="height: 40px; width: auto;"
+                class="me-3"
+            >
+            <div>
+                <h5 class="offcanvas-title fw-bold mb-0" id="mobileSideNavLabel">
+                    {{ settings()['title'] ?? 'MyApp' }}
+                </h5>
+                <small class="text-muted">Navigation Menu</small>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body p-0">
+        <!-- User Info (if logged in) -->
+        @auth
+            <div class="bg-light p-4 border-bottom">
+                <div class="d-flex align-items-center">
+                    <!-- Avatar Mobile dengan kondisi foto -->
+                    @if(Auth::user()->foto == '1.png')
+                        <img 
+                            src="{{ asset('assets/img/avatars/' . Auth::user()->foto) }}" 
+                            alt="avatar" 
+                            class="rounded-circle me-3"
+                            style="width: 50px; height: 50px; object-fit: cover;"
+                        />
+                    @else
+                        <img 
+                            src="{{ asset('storage/uploads/avatars/' . Auth::user()->foto) }}" 
+                            alt="avatar" 
+                            class="rounded-circle me-3"
+                            style="width: 50px; height: 50px; object-fit: cover;"
+                        />
+                    @endif
+                    <div>
+                        <h6 class="mb-1">{{ Auth::user()->name }}</h6>
+                        <small class="text-muted">{{ Auth::user()->email }}</small>
+                    </div>
                 </div>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+        @endif
         
-        <div class="offcanvas-body p-0">
-            <!-- User Info (if logged in) -->
-            @auth
-                <div class="bg-light p-4 border-bottom">
-                    <div class="d-flex align-items-center">
-                        <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
-                             style="width: 50px; height: 50px; font-size: 1.2rem;">
-                            {{ substr(Auth::user()->name, 0, 1) }}
-                        </div>
-                        <div>
-                            <h6 class="mb-1">{{ Auth::user()->name }}</h6>
-                            <small class="text-muted">{{ Auth::user()->email }}</small>
-                        </div>
-                    </div>
-                </div>
-            @endif
+        <!-- Mobile Navigation Links -->
+        <nav class="nav flex-column">
+            <div class="nav-header p-3 bg-light">
+                <small class="text-uppercase text-muted">Main Menu</small>
+            </div>
             
-            <!-- Mobile Navigation Links -->
-            <nav class="nav flex-column">
-                <div class="nav-header p-3 bg-light">
-                    <small class="text-uppercase text-muted">Main Menu</small>
+            <!-- Home -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+               href="{{ route('home') . '#home' }}">
+                <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-house text-primary"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Home</span>
+                    <small class="text-muted d-block">Halaman utama</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Profil -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+               href="{{ route('home') . '#profil' }}">
+                <div class="nav-icon-wrapper bg-info bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-info-circle text-info"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Profil</span>
+                    <small class="text-muted d-block">Profil organisasi</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Struktur -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+               href="#struktur" data-home-url="{{ route('home') . '#struktur' }}">
+                <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-diagram-3 text-success"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Struktur</span>
+                    <small class="text-muted d-block">Struktur organisasi</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Gallery -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+               href="{{ route('home') . '#gallery' }}">
+                <div class="nav-icon-wrapper bg-warning bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-images text-warning"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Gallery</span>
+                    <small class="text-muted d-block">Koleksi foto</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Kegiatan -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+               href="{{ route('home') . '#events' }}">
+                <div class="nav-icon-wrapper bg-danger bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-calendar-event text-danger"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Kegiatan</span>
+                    <small class="text-muted d-block">Acara & kegiatan</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Kontak -->
+            <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                href="{{ route('home') . '#contact' }}">
+                <div class="nav-icon-wrapper bg-dark bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-envelope text-dark"></i>
+                </div>
+                <div>
+                    <span class="fw-medium">Kontak</span>
+                    <small class="text-muted d-block">Hubungi kami</small>
+                </div>
+                <i class="bi bi-chevron-right ms-auto text-muted"></i>
+            </a>
+            
+            <!-- Menu untuk User yang Login -->
+            @auth
+                <div class="nav-header p-3 bg-light mt-2">
+                    <small class="text-uppercase text-muted">Akun Saya</small>
                 </div>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#home">
+                <!-- Profil Saya -->
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                   href="{{ route('profil_security.index') }}">
                     <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-house text-primary"></i>
+                        <i class="bi bi-person text-primary"></i>
                     </div>
                     <div>
-                        <span class="fw-medium">Home</span>
-                        <small class="text-muted d-block">Back to homepage</small>
+                        <span class="fw-medium">Profil Saya</span>
                     </div>
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#about">
-                    <div class="nav-icon-wrapper bg-info bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-info-circle text-info"></i>
+                <!-- Pengaturan -->
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                   href="{{ route('profil_security.index') }}">
+                    <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                        <i class="bi bi-gear text-primary"></i>
                     </div>
                     <div>
-                        <span class="fw-medium">Profile</span>
-                        <small class="text-muted d-block">Learn more about us</small>
+                        <span class="fw-medium">Pengaturan</span>
                     </div>
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#struktur">
+                <!-- Dashboard Admin (jika admin) -->
+                @if(auth()->user()->hasRole('Super Admin|Admin'))
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                   href="{{ route('dashboard') }}">
                     <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-diagram-3 text-success"></i>
+                        <i class="bi bi-speedometer2 text-success"></i>
                     </div>
                     <div>
-                        <span class="fw-medium">Struktur</span>
-                        <small class="text-muted d-block">Organizational structure</small>
+                        <span class="fw-medium">Dashboard Admin</span>
                     </div>
                     <i class="bi bi-chevron-right ms-auto text-muted"></i>
                 </a>
+                @endif
                 
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#gallery">
-                    <div class="nav-icon-wrapper bg-warning bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-images text-warning"></i>
-                    </div>
-                    <div>
-                        <span class="fw-medium">Gallery</span>
-                        <small class="text-muted d-block">Photo collection</small>
-                    </div>
-                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                </a>
-                
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#events">
-                    <div class="nav-icon-wrapper bg-danger bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-calendar-event text-danger"></i>
-                    </div>
-                    <div>
-                        <span class="fw-medium">Kegiatan</span>
-                        <small class="text-muted d-block">Activities & events</small>
-                    </div>
-                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                </a>
-                
-                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#contact">
-                    <div class="nav-icon-wrapper bg-secondary bg-opacity-10 rounded-circle p-2 me-3">
-                        <i class="bi bi-envelope text-secondary"></i>
-                    </div>
-                    <div>
-                        <span class="fw-medium">Kontak</span>
-                        <small class="text-muted d-block">Contact information</small>
-                    </div>
-                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                </a>
-                
-                @auth
-                    <div class="nav-header p-3 bg-light mt-2">
-                        <small class="text-uppercase text-muted">Account</small>
-                    </div>
-                    
-                    <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
-                        <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                            <i class="bi bi-person text-primary"></i>
-                        </div>
-                        <div>
-                            <span class="fw-medium">Profile</span>
-                        </div>
-                        <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                    </a>
-                    
-                    <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="#">
-                        <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                            <i class="bi bi-gear text-primary"></i>
-                        </div>
-                        <div>
-                            <span class="fw-medium">Settings</span>
-                        </div>
-                        <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                    </a>
-                @else
-                    <div class="nav-header p-3 bg-light mt-2">
-                        <small class="text-uppercase text-muted">Authentication</small>
-                    </div>
-                    
-                    <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="{{ route('login') }}">
-                        <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                            <i class="bi bi-box-arrow-in-right text-primary"></i>
-                        </div>
-                        <div>
-                            <span class="fw-medium">Login</span>
-                        </div>
-                        <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                    </a>
-                    
-                    <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" href="{{ route('register') }}">
-                        <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
-                            <i class="bi bi-person-plus text-success"></i>
-                        </div>
-                        <div>
-                            <span class="fw-medium">Register</span>
-                        </div>
-                        <i class="bi bi-chevron-right ms-auto text-muted"></i>
-                    </a>
-                @endauth
-            </nav>
-            
-            <!-- Mobile Auth Actions -->
-            @auth
-                <div class="p-3 border-top">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-box-arrow-right me-2"></i> Logout
-                        </button>
-                    </form>
+            @else
+                <!-- Menu untuk Guest -->
+                <div class="nav-header p-3 bg-light mt-2">
+                    <small class="text-uppercase text-muted">Akun</small>
                 </div>
-            @endif
-        </div>
+                
+                <!-- Login -->
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                   href="{{ route('login') }}">
+                    <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                        <i class="bi bi-box-arrow-in-right text-primary"></i>
+                    </div>
+                    <div>
+                        <span class="fw-medium">Login</span>
+                    </div>
+                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
+                </a>
+                
+                <!-- Register -->
+                <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
+                   href="{{ route('register') }}">
+                    <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                        <i class="bi bi-person-plus text-success"></i>
+                    </div>
+                    <div>
+                        <span class="fw-medium">Register</span>
+                    </div>
+                    <i class="bi bi-chevron-right ms-auto text-muted"></i>
+                </a>
+            @endauth
+        </nav>
+        
+        <!-- Mobile Auth Actions - Logout -->
+        @auth
+            <div class="p-3 border-top">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </button>
+                </form>
+            </div>
+        @endif
     </div>
+</div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileSideNav = document.getElementById('mobileSideNav');
+
+    if (!mobileSideNav) return;
+
+    const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(mobileSideNav);
+
+    mobileSideNav.querySelectorAll('a.nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            const hash = this.hash;
+            const isHome = window.location.pathname === '/';
+
+            if (hash) {
+                e.preventDefault(); // ⛔ cegah scroll default
+
+                offcanvas.hide();
+
+                offcanvas._element.addEventListener(
+                    'hidden.bs.offcanvas',
+                    function handler() {
+                        offcanvas._element.removeEventListener('hidden.bs.offcanvas', handler);
+
+                        if (isHome) {
+                            const target = document.querySelector(hash);
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        } else {
+                            window.location.href = `/${hash}`;
+                        }
+                    }
+                );
+            }
+        });
+    });
+});
+</script>
+
+
+

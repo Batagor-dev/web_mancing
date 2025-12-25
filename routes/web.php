@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,55 +14,71 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
-Route::get('/home/galery', [\App\Http\Controllers\HomeController::class, 'galery']);
+// Public routes (tanpa authentication)
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home/galery', [HomeController::class, 'galery'])->name('home.galery');
+Route::get('/profil', [HomeController::class, 'profil'])->name('home.profil');
+Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('home.struktur');
+Route::get('/kegiatan', [HomeController::class, 'kegiatanAll'])->name('home.kegiatan.all');
+Route::get('/kegiatan/{slug}', [HomeController::class, 'kegiatan'])->name('home.kegiatan.show');
+Route::get('/artikel', [HomeController::class, 'articles'])->name('home.articles');
+Route::get('/artikel/{slug}', [HomeController::class, 'article'])->name('home.article.show');
+Route::get('/kategori/{slug}', [HomeController::class, 'articleCategory'])->name('home.article.category');
 
+// Authentication routes (ditangani oleh Fortify)
+// Fortify akan menangani: /login, /register, /forgot-password, /reset-password, dll.
 
+// Protected routes untuk user yang sudah login
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::middleware(['role:User'])->group(function () {
+        Route::get('/profil_security/security', [App\Http\Controllers\ProfilSecurityController::class, 'security'])->name('profil_security.security');
+        Route::post('/profil_security/password', [App\Http\Controllers\ProfilSecurityController::class, 'updatePassword'])->name('profil_security.password');
+        Route::resource('/profil_security', App\Http\Controllers\ProfilSecurityController::class)->only(['index', 'store']);
+    });
+    // Route khusus untuk admin (Super Admin dan Admin)
+    Route::middleware(['role:Super Admin|Admin'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+        // User management
+        Route::get('/user/role/{user}', [App\Http\Controllers\UserController::class, 'role'])->name('user.role');
+        Route::post('/user/roleaction/{user}', [App\Http\Controllers\UserController::class, 'roleaction'])->name('user.roleaction');
+        Route::resource('/user', App\Http\Controllers\UserController::class);
+        
+        // Role & Permission management
+        Route::post('/role/showaction/{role}', [App\Http\Controllers\RoleController::class, 'showaction'])->name('role.showaction');
+        Route::resource('/role', App\Http\Controllers\RoleController::class);
+        Route::resource('/permissiongroup', App\Http\Controllers\PermissionGroupController::class)->except('show');
+        Route::resource('/permission', App\Http\Controllers\PermissionController::class)->except('show');
+        
+        // Menu management
+        Route::resource('/menu', App\Http\Controllers\MenuController::class)->except('show');
+        
+        // Account management (untuk admin mengelola akun sendiri)
+        Route::get('/acount/security', [App\Http\Controllers\AcountController::class, 'security'])->name('acount.security');
+        Route::post('/acount/password', [App\Http\Controllers\AcountController::class, 'updatePassword'])->name('acount.password');
+        Route::resource('/acount', App\Http\Controllers\AcountController::class)->only(['index', 'store']);
+        
+        // Content management
+        Route::resource('/setting', App\Http\Controllers\SettingController::class)->only(['index', 'store']);
+        
+        // Article management
+        Route::resource('/article_categories', App\Http\Controllers\ArticleCategoryController::class, [
+            'parameters' => ['article_categories' => 'articleCategory:slug']
+        ])->except('show');
+        
+        Route::resource('/article', App\Http\Controllers\ArticleController::class, [
+            'parameters' => ['article' => 'article:slug']
+        ]);
+        
+        // Other management
+        Route::resource('/profil', App\Http\Controllers\ProfilController::class)->except('show');
+        Route::resource('/banner', App\Http\Controllers\BannerController::class)->except('show');
+        Route::resource('/stuktural', App\Http\Controllers\StukturalController::class)->except('show');
+        Route::resource('/galery', App\Http\Controllers\GaleryController::class)->except('show');
+        Route::resource('/kegiatan', App\Http\Controllers\KegiatanController::class)->except('show');
+    });
     
-    Route::get('/user/role/{user}', [App\Http\Controllers\UserController::class, 'role'])->name('user.role');
-    Route::post('/user/roleaction/{user}', [App\Http\Controllers\UserController::class, 'roleaction']);
-    Route::resource('/user', App\Http\Controllers\UserController::class);
-
-    Route::resource('/acount', App\Http\Controllers\AcountController::class)->only(['index', 'store']);
-    Route::get('/acount/security', [App\Http\Controllers\AcountController::class, 'security'])->name('acount.security');
-    Route::post('acount/password', [App\Http\Controllers\AcountController::class, 'updatePassword'])->name('acount.password');
-
-    Route::post('/role/showaction/{role}', [App\Http\Controllers\RoleController::class, 'showaction']);
-    Route::resource('/role', App\Http\Controllers\RoleController::class);
-
-
-    Route::resource('/permissiongroup', App\Http\Controllers\PermissionGroupController::class)->except('show');
-
-    Route::resource('/permission', App\Http\Controllers\PermissionController::class)->except('show');
-
-    Route::resource('/menu', App\Http\Controllers\MenuController::class)->except('show');
-    Route::resource('/setting', App\Http\Controllers\SettingController::class)->only(['index', 'store']);
-
-    Route::resource('/article_categories', App\Http\Controllers\ArticleCategoryController::class, ['parameters' => [
-        'article_categories' => 'articleCategory:slug'
-    ]])->except('show');
-
-    Route::resource('/article', App\Http\Controllers\ArticleController::class)->parameters([
-        'article' => 'article:slug',
-    ]);
-    
-    Route::resource('/profil', App\Http\Controllers\ProfilController::class)->except('show');
-    Route::resource('/banner', App\Http\Controllers\BannerController::class)->except('show');
-    Route::resource('/stuktural', App\Http\Controllers\StukturalController::class)->except('show');
-    Route::resource('/galery', App\Http\Controllers\GaleryController::class)->except('show');
-    Route::resource('/kegiatan', App\Http\Controllers\KegiatanController::class)->except('show');
-    // Route::prefix('setting')->group(function () {
-    //     Route::get('/',[App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-    //     Route::get('/create',[App\Http\Controllers\SettingController::class, 'create'])->name('setting.create');
-    //     Route::post('/store',[App\Http\Controllers\SettingController::class, 'store'])->name('setting.store');
-    //     // Route::get('/edit/{setting}',[App\Http\Controllers\SettingController::class, 'edit'])->name('setting.edit');
-    //     // Route::put('/update/{setting}',[App\Http\Controllers\SettingController::class, 'update'])->name('setting.update');
-    //     Route::delete('/delete/{setting}',[App\Http\Controllers\SettingController::class, 'delete'])->name('setting.delete');
-    // });
+    // Routes untuk semua user yang sudah login (baik admin maupun user biasa)
+    // Contoh: User profile page
+    // Route::get('/my-profile', [ProfileController::class, 'index'])->name('my.profile');
 });
-    
