@@ -14,6 +14,9 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+// Route::view('/', 'welcome');
+
+
 // Public routes (tanpa authentication)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home/galery', [HomeController::class, 'galery'])->name('home.galery');

@@ -1,64 +1,215 @@
+{{-- auth.login --}}
 @extends('layout.auth.main')
-@section('container')
-<div class="d-flex align-items-center justify-content-center min-vh-100" style="background-color: #f8f9fa;">
-    <div class="card shadow rounded" style="width: 400px; background-color: #ffffff;">
-        <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 text-center">Sign In</h3>
 
-            <form action="{{ route('login') }}" method="POST">
-                @csrf
+@push('styles')
+<link rel="stylesheet" href="{{ asset('auth/css/login.css') }}">
+@endpush
 
-                <!-- Email -->
-                <div class="form-floating form-floating-outline mb-3">
-                    <input type="text" id="form-alignment-username" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email" />
-                    <label for="form-alignment-username">Email</label>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Password -->
-                <div class="mb-3 form-password-toggle">
-                    <div class="input-group input-group-merge">
-                        <div class="form-floating form-floating-outline">
-                            <input type="password" id="form-alignment-password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="••••••••" aria-describedby="form-alignment-password2" />
-                            <label for="form-alignment-password">Password</label>
-                        </div>
-                        <span class="input-group-text cursor-pointer" id="form-alignment-password2">
-                            <i class="icon-base ri ri-eye-off-line"></i>
-                        </span>
+@section('content')
+<div class="col-12">
+    <div class="auth-card" data-aos="fade-up">
+        <div class="row g-0">
+            <!-- Left Side - Branding -->
+            <div class="col-md-5 auth-left d-none d-md-block">
+                <div class="text-center position-relative" style="z-index: 1;">
+                    <div class="auth-logo" data-aos="zoom-in" data-aos-delay="100">
+                        <img 
+                            src="{{ settings()['favicon'] ? asset('storage/' . settings()['favicon']) : asset('images/no-image.png') }}"
+                            alt="Logo"
+                            class="img-fluid"
+                            style="max-width:80px"
+                        >
                     </div>
-                    @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+
+                    <h2 class="fw-bold mb-3" data-aos="fade-up" data-aos-delay="200">
+                        Komunitas Mancing APRI
+                    </h2>
+                    
+                    <p class="mb-5 opacity-75" data-aos="fade-up" data-aos-delay="300">
+                        Bergabunglah dengan komunitas pemancing terbesar di Indonesia
+                    </p>
+
+                    <div class="row g-4 mt-4">
+                        <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+                            <div class="feature-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <h6 class="fw-semibold">Komunitas Aktif</h6>
+                            <p class="small opacity-75">Ribuan anggota siap berbagi</p>
+                        </div>
+                        
+                        <div class="col-12" data-aos="fade-up" data-aos-delay="500">
+                            <div class="feature-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <h6 class="fw-semibold">Spot Mancing</h6>
+                            <p class="small opacity-75">Temukan lokasi terbaik</p>
+                        </div>
+                        
+                        <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                            <div class="feature-icon">
+                                <i class="bi bi-trophy-fill"></i>
+                            </div>
+                            <h6 class="fw-semibold">Event & Lomba</h6>
+                            <p class="small opacity-75">Ikuti kompetisi seru</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="col-md-7 auth-right">
+                <!-- Welcome Section -->
+                <div class="welcome-section" data-aos="fade-down">
+                    <div class="welcome-badge">
+                        <i class="bi bi-hand-wave-fill"></i>
+                        <span>Selamat Datang Kembali</span>
+                    </div>
+                    <h3>Masuk ke Akun Anda</h3>
+                    <p>Lanjutkan petualangan memancing Anda</p>
                 </div>
 
-                <!-- Remember Me -->
-                <div class="mb-3">
-                    <label class="form-check m-0">
-                        <input type="checkbox" name="remember" class="form-check-input" />
-                        <span class="form-check-label">Remember me</span>
-                    </label>
-                </div>
+                <!-- Alerts -->
+                @if(session('status'))
+                    <div class="alert-custom alert-success-custom alert-dismissible fade show" role="alert" data-aos="fade-in">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>{{ session('status') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
 
-                <!-- Login Button -->
-                <div class="d-grid gap-2 mb-3">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
+                @if(session('error'))
+                    <div class="alert-custom alert-danger-custom alert-dismissible fade show" role="alert" data-aos="fade-in">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <span>{{ session('error') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
 
-                <!-- Forgot Password -->
-                <div class="text-center mb-3">
-                    <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot Password?</a>
-                </div>
+                <!-- Login Form -->
+                <form action="{{ route('login') }}" method="POST" data-aos="fade-up" data-aos-delay="200">
+                    @csrf
 
-                <!-- Sign Up Button -->
-                <div class="text-center">
-                    <span>Don't have an account?</span>
-                    <a href="{{ route('register') }}" class="btn btn-outline-primary btn-sm ms-2">Sign Up</a>
-                </div>
+                    <!-- Email Field -->
+                    <div class="form-group-modern">
+                        <label for="email" class="form-label-modern">
+                            <i class="bi bi-envelope-fill"></i>Email
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-control-modern @error('email') is-invalid @enderror" 
+                                value="{{ old('email') }}" 
+                                placeholder="contoh@email.com"
+                                required 
+                                autofocus
+                            />
+                            @error('email')
+                                <div class="invalid-feedback-modern">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    <span>Email atau password tidak valid</span>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
 
-            </form>
+                    <!-- Password Field -->
+                    <div class="form-group-modern">
+                        <label for="password" class="form-label-modern">
+                            <i class="bi bi-lock-fill"></i>Password
+                        </label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-control-modern @error('password') is-invalid @enderror" 
+                                placeholder="Masukkan password"
+                                required
+                            />
+                            <button type="button" class="password-toggle-btn" onclick="togglePassword()">
+                                <i class="bi bi-eye-slash-fill" id="toggleIcon"></i>
+                            </button>
+                            @error('password')
+                                <div class="invalid-feedback-modern">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    <span>Password tidak valid</span>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Remember & Forgot -->
+                    <div class="remember-forgot">
+                        <div class="custom-checkbox-wrapper">
+                            <input 
+                                type="checkbox" 
+                                name="remember" 
+                                id="remember"
+                            />
+                            <label for="remember">Ingat Saya</label>
+                        </div>
+                        <a href="{{ route('password.request') }}" class="forgot-link">
+                            Lupa Password?
+                        </a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="btn-login">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Masuk Sekarang</span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="divider-or">
+                        <span>atau</span>
+                    </div>
+
+                    <!-- Register Card -->
+                    <div class="register-card">
+                        <p>Belum bergabung dengan kami?</p>
+                        <a href="{{ route('register') }}" class="register-link">
+                            <span>Daftar Sekarang</span>
+                            <i class="bi bi-arrow-right-circle-fill"></i>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-text">Anggota Aktif</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-text">Spot Mancing</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-text">Event/Tahun</span>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Mobile Logo -->
+                <div class="d-md-none text-center mt-4" data-aos="fade-up">
+                    <div class="auth-logo d-inline-flex align-items-center justify-content-center">
+                        <img 
+                            src="{{ settings()['favicon'] ? asset('storage/' . settings()['favicon']) : asset('images/no-image.png') }}"
+                            alt="Logo"
+                            style="width:60px;height:60px;object-fit:contain"
+                        >
+                    </div>
+                    <p class="text-muted small mt-2 mb-0">Komunitas Mancing APRI</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('auth/js/login.js') }}"></script>
+@endpush
