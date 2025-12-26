@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '508 - Loop Terdeteksi | Komunitas Mancing Apri')
 
 @section('error-icon', '🌀')
@@ -33,3 +34,13 @@
         </a>
     </p>
 @endsection
+=======
+@section('title', '508 - Loop Detected')
+@section('error-code', '508')
+@section('error-title', 'Loop Terdeteksi')
+@section('error-message', 'Server mendeteksi loop tak berujung.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

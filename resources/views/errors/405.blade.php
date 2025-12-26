@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '405 - Metode Tidak Diizinkan | Komunitas Mancing Apri')
 
 @section('error-icon', '⚡')
@@ -35,3 +36,14 @@
         <a href="mailto:tech@mancingapri.com" class="text-decoration-none">tim teknis kami</a>
     </p>
 @endsection
+=======
+@section('title', '405 - Method Not Allowed')
+
+@section('error-code', '405')
+@section('error-title', 'Metode Tidak Diizinkan')
+@section('error-message', 'Metode request yang digunakan tidak diperbolehkan.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

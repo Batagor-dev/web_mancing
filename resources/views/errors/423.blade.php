@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '423 - Terkunci | Komunitas Mancing Apri')
 
 @section('error-icon', '🔒')
@@ -27,3 +28,13 @@
         <li>Hubungi admin jika terkunci terlalu lama</li>
     </ul>
 @endsection
+=======
+@section('title', '423 - Locked')
+@section('error-code', '423')
+@section('error-title', 'Terkunci')
+@section('error-message', 'Resource sedang dikunci dan tidak dapat diakses.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

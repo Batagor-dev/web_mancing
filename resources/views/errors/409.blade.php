@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '409 - Konflik Data | Komunitas Mancing Apri')
 
 @section('error-icon', '⚔️')
@@ -33,3 +34,14 @@
         </a>
     </p>
 @endsection
+=======
+@section('title', '409 - Conflict')
+
+@section('error-code', '409')
+@section('error-title', 'Terjadi Konflik')
+@section('error-message', 'Permintaan tidak dapat diproses karena konflik data.')
+
+@section('error-buttons')
+    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

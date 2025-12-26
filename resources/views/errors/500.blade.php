@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '500 - Error Server | Komunitas Mancing Apri')
 
 @section('error-icon', '🔥')
@@ -36,3 +37,14 @@
         </a>
     </p>
 @endsection
+=======
+@section('title', '500 - Internal Server Error')
+
+@section('error-code', '500')
+@section('error-title', 'Kesalahan Server')
+@section('error-message', 'Terjadi kesalahan pada server. Silakan coba lagi nanti.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

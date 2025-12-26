@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '412 - Prasyarat Gagal | Komunitas Mancing Apri')
 
 @section('error-icon', '🔍')
@@ -24,3 +25,13 @@
         <li>Hubungi admin untuk klarifikasi syarat</li>
     </ul>
 @endsection
+=======
+@section('title', '412 - Precondition Failed')
+@section('error-code', '412')
+@section('error-title', 'Precondition Failed')
+@section('error-message', 'Kondisi prasyarat tidak terpenuhi.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

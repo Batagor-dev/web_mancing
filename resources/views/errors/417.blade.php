@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '417 - Ekspektasi Gagal | Komunitas Mancing Apri')
 
 @section('error-icon', '🤔')
@@ -15,3 +16,13 @@
         <i class="fas fa-home me-2"></i>Beranda
     </a>
 @endsection
+=======
+@section('title', '417 - Expectation Failed')
+@section('error-code', '417')
+@section('error-title', 'Expectation Failed')
+@section('error-message', 'Server tidak dapat memenuhi ekspektasi permintaan.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

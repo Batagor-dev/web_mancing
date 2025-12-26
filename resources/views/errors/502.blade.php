@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '502 - Gateway Bermasalah | Komunitas Mancing Apri')
 
 @section('error-icon', '🚧')
@@ -27,3 +28,14 @@
         <li>Tim sedang memperbaiki koneksi server</li>
     </ul>
 @endsection
+=======
+@section('title', '502 - Bad Gateway')
+
+@section('error-code', '502')
+@section('error-title', 'Gateway Bermasalah')
+@section('error-message', 'Server menerima respon yang tidak valid.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

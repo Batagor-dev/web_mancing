@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '506 - Variant Juga Negosiasi | Komunitas Mancing Apri')
 
 @section('error-icon', '🤝')
@@ -24,3 +25,13 @@
         <li>Hubungi admin jika berlanjut</li>
     </ul>
 @endsection
+=======
+@section('title', '506 - Variant Also Negotiates')
+@section('error-code', '506')
+@section('error-title', 'Variant Error')
+@section('error-message', 'Konfigurasi server tidak valid.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

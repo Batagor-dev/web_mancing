@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '421 - Request Tersesat | Komunitas Mancing Apri')
 
 @section('error-icon', '🧭')
@@ -24,3 +25,13 @@
         <li>Coba dari jaringan berbeda</li>
     </ul>
 @endsection
+=======
+@section('title', '421 - Misdirected Request')
+@section('error-code', '421')
+@section('error-title', 'Permintaan Salah Arah')
+@section('error-message', 'Permintaan dikirim ke server yang salah.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

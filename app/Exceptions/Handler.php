@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,12 +20,33 @@ class Handler extends ExceptionHandler
         // ...
     ];
 
+=======
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+class Handler extends ExceptionHandler
+{
+    /**
+     * Daftar tipe exception yang tidak dilaporkan.
+     *
+     * @var array<int, class-string<Throwable>>
+     */
+    protected $dontReport = [
+        //
+    ];
+
+    /**
+     * Daftar input yang tidak pernah diflash untuk validasi.
+     *
+     * @var array<int, string>
+     */
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9
     protected $dontFlash = [
         'current_password',
         'password',
         'password_confirmation',
     ];
 
+<<<<<<< HEAD
     public function register(): void
     {
         // 404 - Not Found
@@ -40,10 +62,22 @@ class Handler extends ExceptionHandler
 
             if (view()->exists("errors.$status")) {
                 return response()->view("errors.$status", [], $status);
+=======
+    /**
+     * Register the exception handling callbacks for the application.
+     */
+    public function register(): void
+    {
+        $this->reportable(function (Throwable $e) {
+            // Kirim notifikasi error ke Slack/Email dll
+            if (app()->environment('production')) {
+                $this->sendErrorNotification($e);
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9
             }
         });
     }
 
+<<<<<<< HEAD
     public function render($request, Throwable $exception)
     {
         // Custom fishing exception (AMAN)
@@ -69,4 +103,55 @@ class Handler extends ExceptionHandler
     }
 
     // ... methods lainnya
+=======
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $exception)
+    {
+        // Untuk error HTTP
+        if ($exception instanceof HttpException) {
+            $statusCode = $exception->getStatusCode();
+            
+            // View name berdasarkan status code
+            $viewName = "errors.{$statusCode}";
+            
+            // Cek jika view untuk status code tersebut ada
+            if (view()->exists($viewName)) {
+                return response()->view($viewName, [
+                    'exception' => $exception
+                ], $statusCode);
+            }
+        }
+        
+        // Untuk error umum
+        if ($this->shouldReturnJson($request)) {
+            return $this->prepareJsonResponse($request, $exception);
+        }
+        
+        // Fallback ke view error default
+        return response()->view('errors.default', [
+            'exception' => $exception
+        ], 500);
+    }
+
+    /**
+     * Kirim notifikasi error (contoh implementasi)
+     */
+    private function sendErrorNotification(Throwable $e): void
+    {
+        // Implementasi notifikasi error
+        // Bisa ke Slack, Email, Telegram, dll.
+        
+        if (app()->bound('sentry')) {
+            app('sentry')->captureException($e);
+        }
+    }
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9
 }

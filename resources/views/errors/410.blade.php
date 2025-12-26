@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '410 - Konten Hilang | Komunitas Mancing Apri')
 
 @section('error-icon', '🧹')
@@ -27,3 +28,14 @@
         <li>Subscribe newsletter untuk update spot</li>
     </ul>
 @endsection
+=======
+@section('title', '410 - Gone')
+
+@section('error-code', '410')
+@section('error-title', 'Konten Tidak Tersedia')
+@section('error-message', 'Halaman ini sudah tidak tersedia secara permanen.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

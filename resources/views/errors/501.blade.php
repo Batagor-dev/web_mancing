@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '501 - Belum Diimplementasikan | Komunitas Mancing Apri')
 
 @section('error-icon', '🔨')
@@ -35,3 +36,13 @@
         <strong>Q{{ date('Q', strtotime('+1 month')) }} {{ date('Y', strtotime('+1 month')) }}</strong>
     </p>
 @endsection
+=======
+@section('title', '501 - Not Implemented')
+@section('error-code', '501')
+@section('error-title', 'Belum Diimplementasikan')
+@section('error-message', 'Fitur ini belum tersedia di server.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

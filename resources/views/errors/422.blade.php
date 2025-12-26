@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '422 - Data Tidak Valid | Komunitas Mancing Apri')
 
 @section('error-icon', '📝')
@@ -40,3 +41,13 @@
         @endif
     </p>
 @endsection
+=======
+@section('title', '422 - Unprocessable Entity')
+@section('error-code', '422')
+@section('error-title', 'Data Tidak Valid')
+@section('error-message', 'Data tidak dapat diproses meskipun format benar.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Perbaiki Data</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

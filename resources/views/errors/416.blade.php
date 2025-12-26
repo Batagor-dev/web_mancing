@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '416 - Range Tidak Valid | Komunitas Mancing Apri')
 
 @section('error-icon', '🎯')
@@ -24,3 +25,13 @@
         <li>Hubungi admin jika masalah berlanjut</li>
     </ul>
 @endsection
+=======
+@section('title', '416 - Range Not Satisfiable')
+@section('error-code', '416')
+@section('error-title', 'Range Tidak Valid')
+@section('error-message', 'Permintaan range data tidak dapat dipenuhi.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

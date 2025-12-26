@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '426 - Perlu Upgrade | Komunitas Mancing Apri')
 
 @section('error-icon', '⬆️')
@@ -24,3 +25,13 @@
         <li>Pastikan sistem operasi terupdate</li>
     </ul>
 @endsection
+=======
+@section('title', '426 - Upgrade Required')
+@section('error-code', '426')
+@section('error-title', 'Upgrade Diperlukan')
+@section('error-message', 'Silakan upgrade protokol untuk melanjutkan.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '428 - Prasyarat Diperlukan | Komunitas Mancing Apri')
 
 @section('error-icon', '✅')
@@ -24,3 +25,13 @@
         <li>Hubungi admin untuk bantuan</li>
     </ul>
 @endsection
+=======
+@section('title', '428 - Precondition Required')
+@section('error-code', '428')
+@section('error-title', 'Precondition Required')
+@section('error-message', 'Permintaan membutuhkan prasyarat tambahan.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

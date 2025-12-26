@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '411 - Panjang Diperlukan | Komunitas Mancing Apri')
 
 @section('error-icon', '📏')
@@ -24,3 +25,13 @@
         <li>Coba dari browser/perangkat lain</li>
     </ul>
 @endsection
+=======
+@section('title', '411 - Length Required')
+@section('error-code', '411')
+@section('error-title', 'Length Required')
+@section('error-message', 'Server membutuhkan header Content-Length yang valid.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Kembali ke Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

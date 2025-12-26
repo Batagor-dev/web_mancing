@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '451 - Tidak Tersedia Karena Alasan Hukum | Komunitas Mancing Apri')
 
 @section('error-icon', '⚖️')
@@ -32,3 +33,14 @@
         <a href="{{ route('legal.dmca') }}" class="text-decoration-none">DMCA Policy</a>
     </p>
 @endsection
+=======
+@section('title', '451 - Unavailable For Legal Reasons')
+
+@section('error-code', '451')
+@section('error-title', 'Tidak Tersedia Karena Alasan Hukum')
+@section('error-message', 'Konten ini tidak dapat diakses karena pembatasan hukum.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

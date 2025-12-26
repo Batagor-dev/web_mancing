@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '415 - Format Tidak Didukung | Komunitas Mancing Apri')
 
 @section('error-icon', '📎')
@@ -27,3 +28,13 @@
         <li>Konversi file ke format yang didukung</li>
     </ul>
 @endsection
+=======
+@section('title', '415 - Unsupported Media Type')
+@section('error-code', '415')
+@section('error-title', 'Media Tidak Didukung')
+@section('error-message', 'Format media yang dikirim tidak didukung server.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

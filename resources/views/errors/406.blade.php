@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '406 - Format Tidak Diterima | Komunitas Mancing Apri')
 
 @section('error-icon', '📱')
@@ -31,3 +32,13 @@
         Chrome ≥ v80, Firefox ≥ v75, Safari ≥ v13, Edge ≥ v80
     </p>
 @endsection
+=======
+@section('title', '406 - Not Acceptable')
+@section('error-code', '406')
+@section('error-title', 'Tidak Dapat Diterima')
+@section('error-message', 'Server tidak dapat memproses permintaan Anda.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

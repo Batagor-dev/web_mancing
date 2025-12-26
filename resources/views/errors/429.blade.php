@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '429 - Terlalu Banyak Request | Komunitas Mancing Apri')
 
 @section('error-icon', '🐟')
@@ -35,3 +36,14 @@
         untuk rate limit yang lebih tinggi.
     </p>
 @endsection
+=======
+@section('title', '429 - Too Many Requests')
+
+@section('error-code', '429')
+@section('error-title', 'Terlalu Banyak Permintaan')
+@section('error-message', 'Anda mengirim terlalu banyak permintaan dalam waktu singkat.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

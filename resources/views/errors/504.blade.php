@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '504 - Gateway Timeout | Komunitas Mancing Apri')
 
 @section('error-icon', '⏳')
@@ -27,3 +28,14 @@
         <li>Tim sedang memantau performa server</li>
     </ul>
 @endsection
+=======
+@section('title', '504 - Gateway Timeout')
+
+@section('error-code', '504')
+@section('error-title', 'Gateway Timeout')
+@section('error-message', 'Server membutuhkan waktu terlalu lama untuk merespons.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

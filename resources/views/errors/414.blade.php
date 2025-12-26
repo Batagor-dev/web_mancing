@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '414 - URL Terlalu Panjang | Komunitas Mancing Apri')
 
 @section('error-icon', '📜')
@@ -24,3 +25,13 @@
         <li>Hindari copy-paste URL panjang</li>
     </ul>
 @endsection
+=======
+@section('title', '414 - URI Too Long')
+@section('error-code', '414')
+@section('error-title', 'URI Terlalu Panjang')
+@section('error-message', 'Alamat URL yang diminta terlalu panjang untuk diproses server.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

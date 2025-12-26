@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '431 - Header Terlalu Besar | Komunitas Mancing Apri')
 
 @section('error-icon', '📋')
@@ -24,3 +25,13 @@
         <li>Coba dari browser/perangkat lain</li>
     </ul>
 @endsection
+=======
+@section('title', '431 - Header Terlalu Besar')
+@section('error-code', '431')
+@section('error-title', 'Header Terlalu Besar')
+@section('error-message', 'Ukuran header permintaan terlalu besar.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

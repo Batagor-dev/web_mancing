@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '403 - Akses Dilarang | Komunitas Mancing Apri')
 
 @section('error-icon', '🚫')
@@ -35,3 +36,14 @@
         atau hubungi admin untuk izin khusus.
     </p>
 @endsection
+=======
+@section('title', '403 - Forbidden')
+
+@section('error-code', '403')
+@section('error-title', 'Akses Ditolak')
+@section('error-message', 'Anda tidak memiliki izin untuk mengakses halaman ini.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

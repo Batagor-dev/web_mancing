@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '425 - Terlalu Cepat | Komunitas Mancing Apri')
 
 @section('error-icon', '🚦')
@@ -24,3 +25,13 @@
         <li>Nonaktifkan VPN/proxy jika ada</li>
     </ul>
 @endsection
+=======
+@section('title', '425 - Too Early')
+@section('error-code', '425')
+@section('error-title', 'Terlalu Dini')
+@section('error-message', 'Permintaan dikirim terlalu cepat.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Coba Lagi</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

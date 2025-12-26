@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '424 - Dependency Gagal | Komunitas Mancing Apri')
 
 @section('error-icon', '🔄')
@@ -24,3 +25,13 @@
         <li>Hubungi admin jika berulang</li>
     </ul>
 @endsection
+=======
+@section('title', '424 - Failed Dependency')
+@section('error-code', '424')
+@section('error-title', 'Dependensi Gagal')
+@section('error-message', 'Permintaan gagal karena dependensi lain bermasalah.')
+
+@section('error-buttons')
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

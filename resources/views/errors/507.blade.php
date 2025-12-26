@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '507 - Storage Tidak Cukup | Komunitas Mancing Apri')
 
 @section('error-icon', '💾')
@@ -34,3 +35,13 @@
         Free: 100MB | Premium: 10GB | Pro: Unlimited
     </p>
 @endsection
+=======
+@section('title', '507 - Insufficient Storage')
+@section('error-code', '507')
+@section('error-title', 'Penyimpanan Penuh')
+@section('error-message', 'Server kehabisan ruang penyimpanan.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

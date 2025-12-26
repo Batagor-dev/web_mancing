@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '413 - Data Terlalu Besar | Komunitas Mancing Apri')
 
 @section('error-icon', '🐋')
@@ -36,3 +37,14 @@
         </a>
     </p>
 @endsection
+=======
+@section('title', '413 - Payload Too Large')
+
+@section('error-code', '413')
+@section('error-title', 'File Terlalu Besar')
+@section('error-message', 'Ukuran data yang dikirim melebihi batas server.')
+
+@section('error-buttons')
+    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

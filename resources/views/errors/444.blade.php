@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '444 - Koneksi Ditutup | Komunitas Mancing Apri')
 
 @section('error-icon', '📴')
@@ -27,3 +28,13 @@
         <li>Coba akses di waktu lain</li>
     </ul>
 @endsection
+=======
+@section('title', '444 - Connection Closed')
+@section('error-code', '444')
+@section('error-title', 'Koneksi Ditutup')
+@section('error-message', 'Koneksi ditutup tanpa respon dari server.')
+
+@section('error-buttons')
+<a href="{{ url('/') }}" class="btn btn-primary">Beranda</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

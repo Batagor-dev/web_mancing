@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '408 - Waktu Habis | Komunitas Mancing Apri')
 
 @section('error-icon', '⏱️')
@@ -37,3 +38,14 @@
         </a>
     </p>
 @endsection
+=======
+@section('title', '408 - Request Timeout')
+
+@section('error-code', '408')
+@section('error-title', 'Permintaan Waktu Habis')
+@section('error-message', 'Server terlalu lama merespons permintaan Anda.')
+
+@section('error-buttons')
+    <a href="{{ url('/') }}" class="btn btn-primary">Coba Lagi</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9

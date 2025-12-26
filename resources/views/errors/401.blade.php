@@ -1,5 +1,6 @@
 @extends('layout.errors.main')
 
+<<<<<<< HEAD
 @section('title', '401 - Akses Ditolak | Komunitas Mancing Apri')
 
 @section('error-icon', '🔐')
@@ -36,3 +37,14 @@
         <a href="https://wa.me/6281234567890" class="text-decoration-none">0812-3456-7890</a>
     </p>
 @endsection
+=======
+@section('title', '401 - Unauthorized')
+
+@section('error-code', '401')
+@section('error-title', 'Tidak Terautentikasi')
+@section('error-message', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.')
+
+@section('error-buttons')
+    <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+@endsection
+>>>>>>> 593f10c745a523260aade8241ab7390e7dec68e9
