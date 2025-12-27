@@ -11,6 +11,11 @@ class LoginResponse implements LoginResponseContract
     {
         $user = $request->user();
 
+        // 🚨 WAJIB: cek verifikasi email dulu
+        if (! $user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
         // ADMIN / SUPER ADMIN
         if ($user->hasRole(['Admin', 'Super Admin'])) {
             return redirect('/dashboard');
