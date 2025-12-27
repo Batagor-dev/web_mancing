@@ -20,7 +20,7 @@
             <div class="d-none d-lg-flex align-items-center" style="position: relative; z-index: 1051;"> <!-- TAMBAHKAN INI -->
                 <ul class="navbar-nav me-4">
                     <li class="nav-item mx-2">
-                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#home' : route('home') . '#home' }}" 
+                        <a class="nav-link position-relative px-3 py-2 rounded" href="{{ Request::is('/') ? '#hero' : route('home') . '#hero' }}" 
                            data-bs-toggle="tooltip" title="Home">
                             <i class="bi bi-house me-1"></i> Home
                             <span class="nav-indicator"></span>
@@ -199,7 +199,7 @@
             
             <!-- Home -->
             <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
-               href="{{ route('home') . '#home' }}">
+               href="{{ route('home') . '#hero' }}">
                 <div class="nav-icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
                     <i class="bi bi-house text-primary"></i>
                 </div>

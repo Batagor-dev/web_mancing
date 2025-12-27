@@ -75,7 +75,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="bg-light py-5" id="about">
+    <section class="bg-light py-5" id="profil">
         <div class="container">
             <div class="row align-items-start">
 

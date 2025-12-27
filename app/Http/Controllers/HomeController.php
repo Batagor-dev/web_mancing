@@ -12,6 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (request()->has('verified')) {
+            return redirect()->route('home');
+        }
+        
         return view('home.index', [
             'banners' => Banner::where('status', 1)->latest()->get(),
             'profil' => Profil::latest()->first(),
