@@ -7,20 +7,28 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginResponse implements LoginResponseContract
 {
-    /**
-     * Create an HTTP response that represents the object.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function toResponse($request): Response
     {
-        // Redirect berdasarkan role user
-        if ($request->user()->hasRole('Super Admin') || $request->user()->hasRole('Admin')) {
+        $user = $request->user();
+
+        // 🚨 WAJIB: cek verifikasi email dulu
+        if (! $user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
+        if ($user->banned_at) {
+            auth()->logout();
+            return redirect()->route('login')
+                ->withErrors(['email' => 'Akun Anda telah diblokir.']);
+        }
+
+
+        // ADMIN / SUPER ADMIN
+        if ($user->hasRole(['Super Admin', 'Admin'])) {
             return redirect()->route('dashboard');
         }
-        
-        // Untuk user biasa atau role lainnya
+
+        // USER BIASA
         return redirect()->route('home');
     }
 }

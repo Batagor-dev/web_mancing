@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
+use App\Http\Responses\RegisterResponse;
 use App\Http\Responses\LoginResponse;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Actions\Fortify\CreateNewUser;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
+
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -26,6 +29,11 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(
             LoginResponseContract::class,
             LoginResponse::class
+        );
+
+        $this->app->singleton(
+            RegisterResponseContract::class,
+            RegisterResponse::class
         );
     }
 

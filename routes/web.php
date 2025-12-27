@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 
 
 // Public routes (tanpa authentication)
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('clean.verified')->name('home');
 Route::get('/home/galery', [HomeController::class, 'galery'])->name('home.galery');
 Route::get('/profil', [HomeController::class, 'profil'])->name('home.profil');
 Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('home.struktur');
