@@ -56,7 +56,7 @@
                                     : asset('storage/uploads/avatars/' . Auth::user()->foto) }}">
 
                             <label for="upload">
-                                <i class="ri-camera-line"></i>
+                               <i class="bi bi-camera-fill"></i>
                                 <input type="file" id="upload" hidden accept="image/*">
                             </label>
                         </div>
@@ -112,24 +112,29 @@
     </div>
 </div>
 
-{{-- Modal Crop --}}
-<div class="modal fade" id="cropperModal" tabindex="-1">
+{{-- Modal Cropper --}}
+<div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Crop Avatar</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img id="imageToCrop" class="img-fluid">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="cropAndSave">Save</button>
-            </div>
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Crop Photo (1:1)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+        <div style="max-height:400px;">
+            <img id="imageToCrop" src="" class="img-fluid" />
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="cropAndSave">Crop & Save</button>
         </div>
     </div>
+    </div>
 </div>
+
+{{-- Hidden field untuk hasil crop --}}
+<input type="file" name="foto" id="croppedImage" hidden>
 @endsection
 
 @push('scripts')
