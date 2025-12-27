@@ -20,14 +20,6 @@ use App\Http\Controllers\HomeController;
 // Public routes (tanpa authentication)
 Route::get('/', [HomeController::class, 'index'])->middleware('clean.verified')->name('home');
 Route::get('/home/galery', [HomeController::class, 'galery'])->name('home.galery');
-Route::get('/profil', [HomeController::class, 'profil'])->name('home.profil');
-Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('home.struktur');
-Route::get('/kegiatan', [HomeController::class, 'kegiatanAll'])->name('home.kegiatan.all');
-Route::get('/kegiatan/{slug}', [HomeController::class, 'kegiatan'])->name('home.kegiatan.show');
-Route::get('/artikel', [HomeController::class, 'articles'])->name('home.articles');
-Route::get('/artikel/{slug}', [HomeController::class, 'article'])->name('home.article.show');
-Route::get('/kategori/{slug}', [HomeController::class, 'articleCategory'])->name('home.article.category');
-
 // Authentication routes (ditangani oleh Fortify)
 // Fortify akan menangani: /login, /register, /forgot-password, /reset-password, dll.
 

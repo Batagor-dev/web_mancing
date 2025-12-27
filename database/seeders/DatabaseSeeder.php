@@ -18,22 +18,32 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolePermissionSeeder::class);
 
-        $admin = User::create([
+        $adminsuper = User::create([
             'username' => 'farel',
             'name' => 'tagor',
             'email' => 'techareaproduction@gmail.com',
             'email_verified_at' => '2022-08-16 20:57:19',
-            'password' => Hash::make('admin123')
+            'password' => Hash::make('#Tech7127#')
         ]);
 
-        $admin->assignRole('Super Admin');
+        $adminsuper->assignRole('Super Admin');
+
+        $adminsuper = User::create([
+            'username' => 'admin',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'email_verified_at' => '2022-08-16 20:57:19',
+            'password' => Hash::make('#Admin7127#')
+        ]);
+
+        $adminsuper->assignRole('Super Admin');
 
         $user = User::create([
             'username' => 'user',
             'name' => 'User',
             'email' => 'user@gmail.com',
             'email_verified_at' => '2022-08-16 20:57:19',
-            'password' => Hash::make('user12345')
+            'password' => Hash::make('#uUseq134#')
         ]);
 
         $user->assignRole('User');

@@ -151,7 +151,7 @@
 
 @push('scripts')
     {{-- CKEditor CDN --}}
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 
     {{-- Flatpickr CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
