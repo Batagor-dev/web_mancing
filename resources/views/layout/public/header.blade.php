@@ -1,6 +1,6 @@
 <header> <!-- TAMBAHKAN INI -->
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 nav-header" > <!-- TAMBAHKAN INI -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 nav-header fixed-top"> <!-- TAMBAHKAN INI -->
         <div class="container">
             <!-- Brand/Logo -->
             <a class="navbar-brand fw-bold d-flex align-items-center" href="#">

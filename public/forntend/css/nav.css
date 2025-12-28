@@ -1,10 +1,11 @@
-header {
+.nav-header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1050;
+    right: 0;
+    z-index: 1055;
 }
+
 
 .navbar {
     position: relative; /* cukup relative */
