@@ -451,11 +451,13 @@
                     </p>
 
                     <div class="d-flex flex-wrap gap-3 cta-buttons" data-aos="fade-up" data-aos-delay="200">
-                        <a href="https://forms.gle/nJqXgJQnGqj72xfj8 target="_blank""
-                        class="btn btn-light btn-lg rounded-pill px-4 cta-join-btn animate__animated animate__pulse animate__infinite animate__slower">
-                            <i class="bi bi-person-plus me-2"></i>
-                            Daftar Sekarang
-                        </a>
+                        <a href="https://forms.gle/nJqXgJQnGqj72xfj8"
+                            target="_blank"
+                            class="btn btn-light btn-lg rounded-pill px-4 cta-join-btn animate__animated animate__pulse animate__infinite animate__slower">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Daftar Sekarang
+                            </a>
+
 
                         <a href="https://wa.me/628123456789"
                         target="_blank"
