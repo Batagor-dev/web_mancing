@@ -122,7 +122,7 @@
                         <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm me-2">
                             <i class="bi bi-box-arrow-in-right me-1"></i> Login
                         </a>
-                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
+                        <a href="https://forms.gle/nJqXgJQnGqj72xfj8" class="btn btn-primary btn-sm" target="_blank">
                             <i class="bi bi-person-plus me-1"></i> Register
                         </a>
                     @endauth
@@ -334,7 +334,7 @@
                     
                     <!-- Register -->
                     <a class="nav-link d-flex align-items-center py-3 px-4 border-bottom" 
-                       href="{{ route('register') }}">
+                       href="https://forms.gle/nJqXgJQnGqj72xfj8" target="_blank">
                         <div class="nav-icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-3">
                             <i class="bi bi-person-plus text-success"></i>
                         </div>

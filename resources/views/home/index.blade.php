@@ -54,7 +54,7 @@
                         <!-- BUTTON -->
                         <div class="d-flex gap-2 gap-md-3 flex-wrap hero-buttons"
                             data-aos="fade-up" data-aos-delay="900">
-                            <a href="#" class="btn btn-primary btn-sm btn-md-lg rounded-pill px-3 px-md-4 animate__animated animate__pulse animate__infinite animate__slower">
+                            <a href="https://forms.gle/nJqXgJQnGqj72xfj8" class="btn btn-primary btn-sm btn-md-lg rounded-pill px-3 px-md-4 animate__animated animate__pulse animate__infinite animate__slower" target="_blank">
                                 <i class="bi bi-person-plus me-2"></i>
                                 Daftar Sekarang
                             </a>
@@ -451,7 +451,7 @@
                     </p>
 
                     <div class="d-flex flex-wrap gap-3 cta-buttons" data-aos="fade-up" data-aos-delay="200">
-                        <a href="{{ route('register') }}"
+                        <a href="https://forms.gle/nJqXgJQnGqj72xfj8 target="_blank""
                         class="btn btn-light btn-lg rounded-pill px-4 cta-join-btn animate__animated animate__pulse animate__infinite animate__slower">
                             <i class="bi bi-person-plus me-2"></i>
                             Daftar Sekarang

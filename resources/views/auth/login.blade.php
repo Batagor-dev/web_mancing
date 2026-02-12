@@ -170,7 +170,7 @@
                     <!-- Register Card -->
                     <div class="register-card">
                         <p>Belum bergabung dengan kami?</p>
-                        <a href="{{ route('register') }}" class="register-link">
+                        <a href="https://forms.gle/nJqXgJQnGqj72xfj8" class="register-link" target="_blank">
                             <span>Daftar Sekarang</span>
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </a>
